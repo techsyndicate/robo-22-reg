@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+body{
+    background: black;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+}
+.invite {
+    text-align: center;
+}
+.inviteForm {
+    margin-top: 5vw;
+}
+.inviteForm input {
+    width: 30vw;
+    padding: 1vw;
+    margin-top: 1.3vw;
+    margin-bottom: 1.3vw;
+    background-color: #000;
+    border: #383737 solid 1px;
+    /* border-bottom: 2px solid #eee; */
+    font-size: 1vw;
+    color: #eee;
+    border-radius: 2vw;
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.5s ease; 
+    font-size: 1.25vw;
+}
+
+.inviteForm input:focus {
+    outline: none;
+    border-bottom: 2px solid #16e16e;
+}
+.inviteForm h2 {
+    font-size: 2vw;
+}
+
+.inviteForm button {
+    background-color: #16e16e;
+    color: #000;
+    border: none;
+    width: 18vw;
+    height: 3vw;
+    border-radius: 2vw;
+    font-size: 1.25vw;
+    font-family: 'Outfit', sans-serif;
+    
+    margin-bottom: 2vw;
+}
+
