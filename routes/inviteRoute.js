@@ -31,6 +31,7 @@ router.post("/", async (req, res) => {
   mailTransporter.sendMail(mailDetails, function (err, data) {
     if (err) {
       SendError(err);
+      console.log(err);
       return res.status(500).send("Some error occurred");
     } else {
       console.log("Email sent successfully");

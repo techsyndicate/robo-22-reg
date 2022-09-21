@@ -47,3 +47,85 @@ body{
     margin-bottom: 2vw;
 }
 
+/* Register School */
+.reg h1 {
+    color: #16e16e;
+    font-size: 3vw;   
+    margin-right: 11.5vw;  
+    text-align: center;
+}
+
+.reg input {
+    width: 30vw;
+    padding: 0.9vw;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+    background-color: #000;
+    border: #383737 solid 1px;
+    /* border-bottom: 2px solid #eee; */
+    font-size: 1vw;
+    color: #eee;
+    border-radius: 2vw;
+    font-family: 'Outfit', sans-serif;
+    transition: all 0.5s ease; 
+    font-size: 1.25vw;
+}
+
+.reg input:focus {
+    outline: none;
+    border-bottom: 2px solid #16e16e;
+}
+.reg h3 {
+    font-size: 2vw;
+}
+.reg {
+    margin-left: 5vw;
+}
+.col-1{
+    float: left;
+    width: 50%;
+    
+}
+.col-2 {
+    float: right;
+    width: 50%;
+    
+}
+.reg button {
+    /* text-align: center; */
+    margin-left: 33%;
+    background-color: #16e16e;
+    color: #000;
+    border: none;
+    width: 18vw;
+    height: 3vw;
+    border-radius: 2vw;
+    font-size: 1.25vw;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 2vw;
+    margin-top: 2vw;
+}
+
+
+@media screen and (max-width: 600px) {
+    .col-1, .col-2 {
+        width: 100%;
+    }
+    .reg {
+        margin-left: 0;
+        text-align: center;
+        
+    }
+    .reg h1 {
+        margin-right: 0;
+    }
+    .reg button {
+        margin-left: 0;
+    }
+    .reg h3 {
+        margin: 0;
+        
+    }
+
+
+}

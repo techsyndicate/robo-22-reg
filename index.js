@@ -16,9 +16,11 @@ app.use(layouts);
 
 const indexRouter = require("./routes/indexRoute");
 const inviteRouter = require("./routes/inviteRoute");
+const registerRouter = require("./routes/registerRoute");
 
 app.use(indexRouter);
 app.use("/invite", inviteRouter);
+app.use("/register", registerRouter);
 
 const pass = process.env.MONGO_PASS;
 const link = `mongodb+srv://techsyndicate:${pass}@cluster0.cjudlqb.mongodb.net/test`;
