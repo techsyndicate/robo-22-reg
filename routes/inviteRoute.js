@@ -19,6 +19,7 @@ router.get("/", (req, res) => {
   res.render("invite");
 });
 
+
 router.post("/", async (req, res) => {
   const { schName, schEmail, clubName, clubEmail } = req.body;
   if (!schName && !schEmail) {
