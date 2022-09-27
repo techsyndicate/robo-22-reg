@@ -2,11 +2,19 @@
 
 <h3>Request Invite</h3>
 <button onclick="invite()">Request Invite</button>
-
-
+<h3>Register School</h3>
+<button onclick="register()">Register School</button>
+<h3>Edit Participants</h3>
+<button onclick="team()">Edit Team</button>
 
 <script>
     const invite = () => {
         window.location.href = '/invite'
+    }
+    const register = () => {
+        window.location.href = '/register'
+    }
+    const team = () => {
+        window.location.href = '/register/team'
     }
 </script>

@@ -19,19 +19,18 @@ router.get("/", (req, res) => {
   res.render("invite");
 });
 
-
 router.post("/", async (req, res) => {
   const { schName, schEmail, clubName, clubEmail } = req.body;
   if (!schName && !schEmail) {
     return res.status(400).send("Please fill all the fields");
   }
-  
+
   recievers = clubEmail ? `${schEmail}, ${clubEmail}` : schEmail;
   let mailDetails = {
     from: email,
     to: recievers,
     subject: "Invite for Robotronics 2022",
-    html: await renderFile("views/mailInvite.ejs"),
+    html: await renderFile("views/mailInvite.ejs", { userId, pass }),
   };
 
   mailTransporter.sendMail(mailDetails, function (err, data) {

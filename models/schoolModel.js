@@ -17,6 +17,8 @@ const schoolSchema = new Schema(
     studentName: reqString,
     studentEmail: reqString,
     studentPhone: reqString,
+    userId: nonReqString,
+    pass: nonReqString,
   },
   { timestamps: true }
 );

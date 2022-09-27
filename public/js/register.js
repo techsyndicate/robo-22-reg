@@ -39,12 +39,11 @@ regButton.addEventListener("click", (e) => {
     },
     body: JSON.stringify(data),
   })
-    .then((res) => {
-      return res.json();
-    })
+    .then((res) => res.json())
     .then((data) => {
-      if (data.status == 200) {
+      if (data.msg === "success") {
         notyf.success("Registration Successful");
+        window.location.href = "/register/team";
       } else {
         notyf.error("Registration Failed");
       }

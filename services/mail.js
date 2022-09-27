@@ -1,10 +1,12 @@
 const ejs = require("ejs");
+const { SendError } = require("./error");
 
-const renderFile = (file) => {
+const renderFile = (file, data) => {
   return new Promise((resolve) => {
-    ejs.renderFile(file, (err, result) => {
+    ejs.renderFile(file, data, (err, result) => {
       if (err) {
-        logger.error(err);
+        console.log(err);
+        SendError(err);
       }
       resolve(result);
     });

@@ -5,6 +5,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const layouts = require("express-ejs-layouts");
 const { SendError } = require("./services/error");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -13,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set("views", path.join(__dirname, "views"));
 app.use(layouts);
+app.use(cookieParser());
 
 const indexRouter = require("./routes/indexRoute");
 const inviteRouter = require("./routes/inviteRoute");

@@ -1,0 +1,39 @@
+<h1>Login</h1>
+
+<form class="schoolLoginForm">
+    <input name="userId" id="userId" type="text" required autocomplete="off" placeholder="User Id"> <br><br>
+    <input name="password" id="password" type="password" required autocomplete="off" placeholder="Password"> <br><br>
+    <button id="schLoginBtn">Login </button>
+</form>
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script>
+    var notyf = new Notyf()
+    document.querySelector("#schLoginBtn").addEventListener("click", (e) => {
+        e.preventDefault()
+        var userId = document.querySelector("#userId").value
+        var password = document.querySelector("#password").value
+        const data = {
+            userId,
+            password
+        }
+        fetch('/register/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.msg === 'success') {
+
+                    window.location.reload();
+                } else {
+                    notyf.error(data.message);
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    })
+</script>
