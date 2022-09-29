@@ -5,15 +5,86 @@
 
         <h2>School Details</h2>
 
-        <input name="school_name" id="school_name" type="text" required autocomplete="off" placeholder="Amity International School, Sector-46, Gurgraon"> <br><br>
+        <input name="school_name" id="school_name" type="text" required autocomplete="off"
+            placeholder="Amity International School, Sector-46, Gurgraon"> <br>
 
-        <input name="school_email" id="school_email" type="email" required autocomplete="off" placeholder="aisg46@amity.edu"> <br><br>
+        <div id="emailList">
+            <input name="school_email" id="school_email" type="email" required autocomplete="off"
+                placeholder="aisg46@amity.edu">
+        </div>
 
-        <h2>Club Details</h2>
-        <input name="club_name" id="club_name" type="text" autocomplete="off" placeholder="Tech Syndicate"> <br><br>
-        <input name="club_email" id="club_email" type="email" autocomplete="off" placeholder="cyberamity46@gmail.com"> <br><br>
-        <button id="inviteBtn">Request Invite</button>
+        <button id="addEmailBtn">Add Email</button>
+        <button id="inviteSubmitBtn">Request Invite</button>
     </form>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-<script src="./js/invite.js"></script>
+
+<style>
+    #emailList {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
+
+<script>
+    var notyf = new Notyf();
+    var emails = 0; // stores number of emails user added
+
+    //send emails to server
+    document.getElementById("inviteSubmitBtn").addEventListener("click", (e) => {
+        e.preventDefault();
+        const schName = document.getElementById("school_name");
+        const schEmails = document.querySelectorAll("#emailList input");
+        let emailList = [];
+        for (let i = 0; i < schEmails.length; i++) {
+            if (schEmails[i].value == "") {
+                notyf.error("Please fill all the fields");
+                return;
+            }
+            else {
+                emailList.push(schEmails[i].value);
+            }
+        }
+        console.log(emailList);
+
+        fetch("/invite", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                schName: schName.value,
+                schEmails: emailList
+            }),
+        }).then(async (res) => {
+            if (res.status === 200) {
+                notyf.success("Invite Sent");
+            } else {
+                notyf.error("some error occurred");
+            }
+        });
+    });
+
+    // function to add email input field
+    document.getElementById("addEmailBtn").addEventListener("click", (e) => {
+        e.preventDefault();
+        const emailList = document.getElementById("emailList");
+        //convert html to dom node element
+        const input = document.createRange().createContextualFragment(`<div><input name="school_email"
+        id="school_email${emails+1}" type="email" required autocomplete="off" placeholder="aisg46@amity.edu">
+    <button id="school_email_button_${emails+1}">X</button><div>`);
+        emails++;
+        console.log(input)
+        emailList.appendChild(input);
+    });
+
+    document.addEventListener("click", (e) => {
+        if (e.target.id.includes("school_email_button")) {
+            const id = e.target.id.split("_")[3];
+            console.log(id);
+            const email = document.getElementById(`school_email${id}`);
+            email.remove();
+            e.target.remove();
+        }
+    });
+</script>

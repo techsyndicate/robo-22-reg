@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
     from: email,
     to: recievers,
     subject: "Invite for Robotronics 2022",
-    html: await renderFile("views/mailInvite.ejs", { userId, pass }),
+    html: await renderFile("views/inviteSuccessfull.ejs", { userId, pass }),
   };
 
   mailTransporter.sendMail(mailDetails, function (err, data) {
