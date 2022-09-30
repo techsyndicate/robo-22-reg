@@ -1,12 +1,14 @@
 <div class="invite">
-    <h1 style="color: #16e16e; font-size: 3vw;">Request an Invite</h1>
 
     <form id="inviteForm" class="inviteForm">
-
-        <h2>School Details</h2>
+        <h1 style="color: #16e16e; font-size: 3vw;">Request an Invite</h1>
+<br><br>
+        <h2>School Name</h2>
 
         <input name="school_name" id="school_name" type="text" required autocomplete="off"
             placeholder="Amity International School, Sector-46, Gurgraon"> <br>
+
+        <h2>School Email(s)</h2>
 
         <div id="emailList">
             <input name="school_email" id="school_email" type="email" required autocomplete="off"
@@ -19,16 +21,59 @@
 </div>
 
 <style>
+    .inviteForm {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        width: 30vw;
+    }
+
+    .inviteForm h2 {
+        color: #16e16e;
+        font-size: 1.3vw;
+        font-weight: 500;
+    }
     .invite {
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
+        min-height: 80vh;
     }
 
     #emailList {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
+    }
+
+    input {
+        width: 30vw;
+        height: 3vw;
+        border: none;
+        border-bottom: 1px solid #16e16e;
+        background-color: transparent;
+        color: #fff;
+        font-size: 1.3vw;
+        font-weight: 500;
+        margin-bottom: 1vw;
+    }
+
+    .removable_email {
+        display: flex;
+        flex-direction: row;
         align-items: center;
+    }
+    .remove_button {
+        background-color: transparent;
+        cursor: pointer;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 1.4vw;
+        font-weight: 500;
+        margin-left: 1vw;
     }
 </style>
 
@@ -88,9 +133,9 @@
         e.preventDefault();
         const emailList = document.getElementById("emailList");
         //convert html to dom node element
-        const input = document.createRange().createContextualFragment(`<div><input name="school_email"
+        const input = document.createRange().createContextualFragment(`<div class="removable_email"><input name="school_email"
         id="school_email${emails+1}" type="email" required autocomplete="off" placeholder="aisg46@amity.edu">
-    <button id="school_email_button_${emails+1}">X</button><div>`);
+    <button class="remove_button" id="school_email_button_${emails+1}">X</button><div>`);
         emails++;
         console.log(input)
         emailList.appendChild(input);
