@@ -30,6 +30,15 @@
     var notyf = new Notyf();
     var emails = 0; // stores number of emails user added
 
+    //email validator
+    function ValidateEmail(email) {
+        const re =
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
+
+
+
     //send emails to server
     document.getElementById("inviteSubmitBtn").addEventListener("click", (e) => {
         e.preventDefault();
@@ -40,29 +49,32 @@
             if (schEmails[i].value == "") {
                 notyf.error("Please fill all the fields");
                 return;
-            }
-            else {
+            } else if (!ValidateEmail(schEmails[i].value)) {
+                notyf.error("Please enter a valid email in all fields");
+                return;
+            } else {
                 emailList.push(schEmails[i].value);
             }
         }
-        console.log(emailList);
 
-        fetch("/invite", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                schName: schName.value,
-                schEmails: emailList
-            }),
-        }).then(async (res) => {
-            if (res.status === 200) {
-                notyf.success("Invite Sent");
-            } else {
-                notyf.error("some error occurred");
-            }
-        });
+        if (emailList.length == emails + 1) {
+            fetch("/invite", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    schName: schName.value,
+                    schEmails: emailList
+                }),
+            }).then(async (res) => {
+                if (res.status === 200) {
+                    notyf.success("Invite Sent");
+                } else {
+                    notyf.error("some error occurred");
+                }
+            });
+        }
     });
 
     // function to add email input field

@@ -2,6 +2,7 @@ const router = require("Express").Router();
 const nodemailer = require("nodemailer");
 const { SendError } = require("../services/error");
 const { renderFile } = require("../services/mail");
+const { ValidateEmail } = require("../services/misc");
 
 let email = process.env.GMAIL_USER;
 let pass = process.env.GMAIL_PASS;
@@ -20,12 +21,14 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { schName, schEmail, clubName, clubEmail } = req.body;
-  if (!schName && !schEmail) {
+  const { schName, schEmails } = req.body;
+  if (!schName && !schEmails) {
     return res.status(400).send("Please fill all the fields");
   }
 
-  recievers = clubEmail ? `${schEmail}, ${clubEmail}` : schEmail;
+  recievers = schEmails.join(",");
+  console.log(recievers);
+
   let mailDetails = {
     from: email,
     to: recievers,
@@ -43,6 +46,8 @@ router.post("/", async (req, res) => {
       return res.status(200).send("Invite Sent");
     }
   });
+
+  return res.status(200).send("Invite Sent");
 });
 
 module.exports = router;
