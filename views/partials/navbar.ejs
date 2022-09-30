@@ -2,46 +2,53 @@
 <header class="navbar-container">
     <nav class="navbar">
         <a href="/" class="nav-branding"><img width="50px" src="/assets/ts.png"></a>
-        <ul class="nav-menu">
-            <li class="nav-item">
-                <a href="/invite" class="nav-link">Request Invite</a>
-            </li>
-            <% if (typeof user != "undefined"){ %>
-            <% } else { %>
-            <li class="nav-item">
-                <a href="/login" class="nav-link">Log In</a>
-            </li>
-            <li class="nav-item sign-button-mobile">
-                <a href="/register" class="nav-link">Sign Up</a>
-            </li>
-            <% } %>
+        <div class="nav-most">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/invite" class="nav-link">Request Invite</a>
+                </li>
+                <% if (typeof user != "undefined"){ %>
+                <% } else { %>
+                <li class="nav-item">
+                    <a href="/login" class="nav-link">Log In</a>
+                </li>
+                <li class="nav-item sign-button-mobile">
+                    <a href="/register" class="nav-link">Sign Up</a>
+                </li>
+                <% } %>
 
-        </ul>
-        <div class="right-side-nav">
-            <% if (typeof user != "undefined"){ %>
-            <a href="/dashboard"><img width="28px" style="filter:invert(100%)"
-                    src="https://cdn.discordapp.com/attachments/1005877818586038424/1006499498874380359/profile.png"
-                    alt="profile"></a>
-            <% } else { %>
-            <button class="sign-button" onclick="new function(){window.location.href = '/register'};">Sign
-                up</button>
-            <% } %>
-        </div>
-        <div class="hamburger">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
+            </ul>
+            <div class="right-side-nav">
+                <% if (typeof user != "undefined"){ %>
+                <a href="/dashboard"><img width="28px" style="filter:invert(100%)"
+                        src="https://cdn.discordapp.com/attachments/1005877818586038424/1006499498874380359/profile.png"
+                        alt="profile"></a>
+                <% } else { %>
+                <button class="sign-button" onclick="new function(){window.location.href = '/register'};">Sign
+                    up</button>
+                <% } %>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
         </div>
     </nav>
 </header>
 
 <style>
+    .nav-most {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
     .sign-button-mobile {
         display: none;
     }
 
     .sign-button {
-        background-color: #393E47;
+        background-color: #00AE40;
         color: white;
         border-radius: 5px;
         width: 140px;
@@ -54,7 +61,6 @@
     .right-side-nav {
         display: flex;
         justify-content: space-between;
-        width: 30vw;
         align-items: center;
         margin-right: 30px;
     }
@@ -94,7 +100,7 @@
     }
 
     .nav-menu {
-        /* margin-left: 2.5vw; */
+        margin-right: 2.5vw; 
         display: flex;
         align-items: center;
         gap: 3vw;
@@ -124,38 +130,7 @@
         background-color: white;
     }
 
-    .search-input-div {
-        border: none;
-        border-radius: 10px;
-        background-color: white;
-        font-size: 1.2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
-    }
-
-    .search-input {
-        width: 250px;
-        height: 40px;
-        border: none;
-        border-radius: 10px;
-        background-color: white;
-        color: black;
-        font-size: 1.2rem;
-        padding-left: 20px;
-        transition: 0.3s;
-    }
-
-    .search-icon {
-        padding-right: 10px;
-    }
-
     @media(max-width:768px) {
-        .search-input-div {
-            display: none;
-        }
-
         .sign-button {
             display: none;
         }
