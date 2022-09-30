@@ -1,4 +1,4 @@
-const router = require("Express").Router();
+const router = require("express").Router();
 const nodemailer = require("nodemailer");
 const { SendError } = require("../services/error");
 const { renderFile } = require("../services/mail");
