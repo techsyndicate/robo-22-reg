@@ -24,6 +24,9 @@ router.get("/", (req, res) => {
 router.post("/school", async (req, res) => {
   const school = new School(req.body);
 
+  const token = Math.random().toString(36).substr(2, 16);
+  school.discordCode = token;
+  console.log(school);
   await school.save().then(async (doc) => {
     let userId = doc.schoolEmail;
     let pass = doc.pass;
@@ -52,6 +55,7 @@ router.post("/school", async (req, res) => {
       html: await renderFile("views/registerMail.ejs", {
         userId,
         pass,
+        token,
       }),
     };
 
