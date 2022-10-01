@@ -5,6 +5,7 @@ const router = require("express").Router();
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const Team = require("../models/teamModel");
 let email = process.env.GMAIL_USER;
 let pass = process.env.GMAIL_PASS;
 
@@ -79,7 +80,21 @@ router.get("/team", (req, res) => {
           console.log(err);
           SendError(err);
         } else {
-          return res.render("team", { school: doc });
+          let schId = doc._id;
+          let schName = doc.schoolName;
+          Team.findOne({ schId }, (err, doc) => {
+            if (err) {
+              console.log(err);
+              SendError(err);
+              return res.render("error");
+            } else {
+              if (doc) {
+                return res.render("team", { team: doc, schId, schName });
+              } else {
+                return res.render("team", { team: null, schId, schName });
+              }
+            }
+          });
         }
       });
     }
@@ -112,5 +127,29 @@ router.post("/login", async (req, res) => {
       }
     }
   }).clone();
+});
+
+router.post("/team", async (req, res) => {
+  let { schId } = req.body;
+
+  const team = await Team.findOne({ schId });
+  if (team) {
+    const team = await Team.findOneAndUpdate({ schId }, req.body).catch(
+      (err) => {
+        console.log(err);
+        SendError(err);
+        return res.status(500).send("Some error occurred");
+      }
+    );
+    return res.status(200).send({ msg: "Updated" });
+  } else {
+    const newTeam = new Team(req.body);
+    const team = await newTeam.save().catch((err) => {
+      console.log(err);
+      SendError(err);
+      return res.status(500).send("Some error occurred");
+    });
+    return res.status(200).send({ msg: "Registered" });
+  }
 });
 module.exports = router;
