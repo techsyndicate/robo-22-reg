@@ -1,81 +1,24 @@
 <div class="invite">
 
+
+    <h1 style="color: #16e16e; font-size: 3vw; text-align: center;">Request an Invite</h1>
+    <br><br>
     <form id="inviteForm" class="inviteForm">
-        <h1 style="color: #16e16e; font-size: 3vw;">Request an Invite</h1>
-<br><br>
         <h2>School Name</h2>
 
-        <input name="school_name" id="school_name" type="text" required autocomplete="off"
-            placeholder="Amity International School, Sector-46, Gurgraon"> <br>
+        <input name="school_name" id="school_name" type="text" required autocomplete="off" placeholder="Amity International School, Sector-46, Gurgraon"> <br>
 
         <h2>School Email(s)</h2>
 
         <div id="emailList">
-            <input name="school_email" id="school_email" type="email" required autocomplete="off"
-                placeholder="aisg46@amity.edu">
+            <input name="school_email" id="school_email" type="email" required autocomplete="off" placeholder="aisg46@amity.edu">
         </div>
 
-        <button id="addEmailBtn">Add Email</button>
+        <button id="addEmailBtn">Add Email</button> <br>
         <button id="inviteSubmitBtn">Request Invite</button>
     </form>
 </div>
 
-<style>
-    .inviteForm {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        width: 30vw;
-    }
-
-    .inviteForm h2 {
-        color: #16e16e;
-        font-size: 1.3vw;
-        font-weight: 500;
-    }
-    .invite {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 80vh;
-    }
-
-    #emailList {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    input {
-        width: 30vw;
-        height: 3vw;
-        border: none;
-        border-bottom: 1px solid #16e16e;
-        background-color: transparent;
-        color: #fff;
-        font-size: 1.3vw;
-        font-weight: 500;
-        margin-bottom: 1vw;
-    }
-
-    .removable_email {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-    .remove_button {
-        background-color: transparent;
-        cursor: pointer;
-        border: none;
-        border-radius: 3px;
-        color: #fff;
-        font-size: 1.4vw;
-        font-weight: 500;
-        margin-left: 1vw;
-    }
-</style>
 
 <script>
     var notyf = new Notyf();
@@ -96,10 +39,13 @@
         const schName = document.getElementById("school_name");
         const schEmails = document.querySelectorAll("#emailList input");
         let emailList = [];
+        if (schEmails[0].value == "") {
+            notyf.error("Please enter a valid email address");
+            return;
+        }
         for (let i = 0; i < schEmails.length; i++) {
             if (schEmails[i].value == "") {
-                notyf.error("Please fill all the fields");
-                return;
+                continue
             } else if (!ValidateEmail(schEmails[i].value)) {
                 notyf.error("Please enter a valid email in all fields");
                 return;
@@ -135,7 +81,7 @@
         //convert html to dom node element
         const input = document.createRange().createContextualFragment(`<div class="removable_email"><input name="school_email"
         id="school_email${emails+1}" type="email" required autocomplete="off" placeholder="aisg46@amity.edu">
-    <button class="remove_button" id="school_email_button_${emails+1}">X</button><div>`);
+   </div>`);
         emails++;
         console.log(input)
         emailList.appendChild(input);
