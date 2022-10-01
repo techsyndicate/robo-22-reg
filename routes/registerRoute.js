@@ -26,39 +26,42 @@ router.post("/school", async (req, res) => {
   await school
     .save()
     .then(async (doc) => {
-      console.log(school.schoolName);
-      let userId =
-        school.schoolName.slice(0, 3) +
-        school.studentName.slice(0, 3) +
-        school.teacherName.slice(0, 3);
-      let pass = "UHUHUH";
-      let epass = await bcrypt.hash(pass, 10);
-      jwt.sign(userId, process.env.SECRET, (err, token) => {
-        res.cookie("token", token);
+      let userId = school.schoolEmail;
+      let pass = school.pass;
+
+      jwt.sign({ userId }, process.env.JWT_SECRET, (err, token) => {
+        if (err) {
+          SendError(res, err);
+          return res.status(500).send("Some error occurred");
+        } else {
+          res.cookie("token", token, {
+            maxAge: 1000 * 60 * 60 * 24 * 7,
+          });
+        }
       });
-      await School.findByIdAndUpdate(doc._id, { userId, pass: epass });
+      await School.findByIdAndUpdate(doc._id, { userId, pass });
       let recievers = school.clubEmail
         ? `${school.clubEmail}, ${school.schoolEmail}`
         : school.schoolEmail;
+
       let mailDetails = {
         from: email,
         to: recievers,
-        subject: "Invite for Robotronics 2022",
+        subject: "Registration for Robotronics 2022",
         html: await renderFile("views/registerMail.ejs", {
           userId,
-          password: pass,
+          pass,
         }),
       };
 
-      mailTransporter.sendMail(mailDetails, function (err, data) {
+      await mailTransporter.sendMail(mailDetails, function (err, data) {
         if (err) {
           SendError(err);
           console.log(err);
           return res.status(500).send("Some error occurred");
         } else {
           console.log("Email sent successfully");
-          console.log("hello");
-          return res.status(200).json({ msg: "success" });
+          return res.status(200).send({ msg: "success" });
         }
       });
     })
@@ -80,7 +83,7 @@ router.get("/team", (req, res) => {
           console.log(err);
           SendError(err);
         } else {
-          res.render("team", { school: doc });
+          return res.render("team", { school: doc });
         }
       });
     }
@@ -95,21 +98,19 @@ router.post("/login", async (req, res) => {
       return SendError(err);
     } else {
       if (doc) {
-        await bcrypt.compare(password, doc.pass, (err, result) => {
-          if (err) {
-            console.log(err);
-            return SendError(err);
-          } else {
-            if (result) {
-              jwt.sign(userId, process.env.SECRET, (err, token) => {
-                res.cookie("token", token);
-                return res.status(200).json({ msg: "success" });
-              });
+        if ((doc.pass = password)) {
+          jwt.sign(userId, process.env.SECRET, (err, token) => {
+            if (err) {
+              console.log(err);
+              return SendError(err);
             } else {
-              return res.status(400).json({ msg: "Invalid Password" });
+              res.cookie("token", token);
+              return res.status(200).json({ msg: "success" });
             }
-          }
-        });
+          });
+        } else {
+          return res.status(400).json({ msg: "Invalid Password" });
+        }
       } else {
         return res.status(400).json({ msg: "Invalid User ID" });
       }
