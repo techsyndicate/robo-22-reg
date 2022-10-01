@@ -26,16 +26,14 @@ router.post("/school", async (req, res) => {
 
   const token = Math.random().toString(36).substr(2, 16);
   school.discordCode = token;
+  let userId = req.body.schoolEmail;
+  school.userId = userId;
   console.log(school);
   await school.save().then(async (doc) => {
-    let userId = doc.schoolEmail;
-    let pass = doc.pass;
-
     await jwt.sign({ userId }, process.env.SECRET, (err, token) => {
       if (err) {
         SendError(err);
         console.log(err);
-        console.log("jwt");
         return res.status(500).send("Some error occurred");
       } else {
         res.cookie("token", token, {
@@ -43,7 +41,7 @@ router.post("/school", async (req, res) => {
         });
       }
     });
-    await School.findByIdAndUpdate(doc._id, { userId, pass });
+
     let recievers = school.clubEmail
       ? `${school.clubEmail}, ${school.schoolEmail}`
       : school.schoolEmail;
