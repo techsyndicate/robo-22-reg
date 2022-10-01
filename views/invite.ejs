@@ -1,8 +1,8 @@
 <div class="invite">
 
     <form id="inviteForm" class="inviteForm">
-        <h1 style="color: #16e16e; font-size: 3vw;">Request an Invite</h1>
-<br><br>
+        <h1>Request Invite(s)</h1>
+        <br><br>
         <h2>School Name</h2>
 
         <input name="school_name" id="school_name" type="text" required autocomplete="off"
@@ -26,14 +26,20 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-        width: 30vw;
+        width: 500px;
     }
 
     .inviteForm h2 {
         color: #16e16e;
-        font-size: 1.3vw;
+        font-size: 1.3rem;
         font-weight: 500;
     }
+
+    .inviteForm h1{
+        color: #16e16e;
+        font-size: 3rem;
+    }
+
     .invite {
         display: flex;
         flex-direction: column;
@@ -49,15 +55,15 @@
     }
 
     input {
-        width: 30vw;
-        height: 3vw;
+        width: 450px;
+        height: 3rem;
         border: none;
         border-bottom: 1px solid #16e16e;
         background-color: transparent;
         color: #fff;
-        font-size: 1.3vw;
+        font-size: 1.3rem;
         font-weight: 500;
-        margin-bottom: 1vw;
+        margin-bottom: 10px;
     }
 
     .removable_email {
@@ -65,15 +71,16 @@
         flex-direction: row;
         align-items: center;
     }
+
     .remove_button {
         background-color: transparent;
         cursor: pointer;
         border: none;
         border-radius: 3px;
         color: #fff;
-        font-size: 1.4vw;
+        font-size: 1.4rem;
         font-weight: 500;
-        margin-left: 1vw;
+        margin-left: 1rem;
     }
 </style>
 
