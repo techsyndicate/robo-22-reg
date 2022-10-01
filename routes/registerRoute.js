@@ -23,54 +23,50 @@ router.get("/", (req, res) => {
 router.post("/school", async (req, res) => {
   const school = new School(req.body);
 
-  await school
-    .save()
-    .then(async (doc) => {
-      let userId = school.schoolEmail;
-      let pass = school.pass;
+  await school.save().then(async (doc) => {
+    let userId = doc.schoolEmail;
+    let pass = doc.pass;
 
-      jwt.sign({ userId }, process.env.JWT_SECRET, (err, token) => {
-        if (err) {
-          SendError(res, err);
-          return res.status(500).send("Some error occurred");
-        } else {
-          res.cookie("token", token, {
-            maxAge: 1000 * 60 * 60 * 24 * 7,
-          });
-        }
-      });
-      await School.findByIdAndUpdate(doc._id, { userId, pass });
-      let recievers = school.clubEmail
-        ? `${school.clubEmail}, ${school.schoolEmail}`
-        : school.schoolEmail;
-
-      let mailDetails = {
-        from: email,
-        to: recievers,
-        subject: "Registration for Robotronics 2022",
-        html: await renderFile("views/registerMail.ejs", {
-          userId,
-          pass,
-        }),
-      };
-
-      await mailTransporter.sendMail(mailDetails, function (err, data) {
-        if (err) {
-          SendError(err);
-          console.log(err);
-          return res.status(500).send("Some error occurred");
-        } else {
-          console.log("Email sent successfully");
-          return res.status(200).send({ msg: "success" });
-        }
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({ status: 500 });
-
-      console.log(err);
-      SendError(err);
+    await jwt.sign({ userId }, process.env.SECRET, (err, token) => {
+      if (err) {
+        SendError(err);
+        console.log(err);
+        console.log("jwt");
+        return res.status(500).send("Some error occurred");
+      } else {
+        res.cookie("token", token, {
+          maxAge: 1000 * 60 * 60 * 24 * 7,
+        });
+      }
     });
+    await School.findByIdAndUpdate(doc._id, { userId, pass });
+    let recievers = school.clubEmail
+      ? `${school.clubEmail}, ${school.schoolEmail}`
+      : school.schoolEmail;
+
+    let mailDetails = {
+      from: email,
+      to: recievers,
+      subject: "Registration for Robotronics 2022",
+      html: await renderFile("views/registerMail.ejs", {
+        userId,
+        pass,
+      }),
+    };
+
+    await mailTransporter.sendMail(mailDetails, function (err, data) {
+      if (err) {
+        SendError(err);
+        console.log(err);
+        console.log("mail");
+        return res.status(500).send("Some error occurred");
+      } else {
+        console.log("Email sent successfully");
+        console.log("Registration Successful");
+        return res.status(200).send({ status: 200, message: "Registered" });
+      }
+    });
+  });
 });
 router.get("/team", (req, res) => {
   let token = req.cookies.token;
@@ -78,7 +74,7 @@ router.get("/team", (req, res) => {
     if (err) {
       res.render("teamLogin");
     } else {
-      School.findOne({ userId: decoded }, (err, doc) => {
+      School.findOne({ userId: decoded.userId }, (err, doc) => {
         if (err) {
           console.log(err);
           SendError(err);

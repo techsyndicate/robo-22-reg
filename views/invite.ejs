@@ -5,14 +5,12 @@
 
         <h2>School Name</h2>
 
-        <input name="school_name" id="school_name" type="text" required autocomplete="off"
-            placeholder="Amity International School, Sector-46, Gurgraon"> <br>
+        <input name="school_name" id="school_name" type="text" required autocomplete="off" placeholder="Amity International School, Sector-46, Gurgraon"> <br>
 
         <h2>School Email(s)</h2>
 
         <div id="emailList">
-            <input name="school_email" id="school_email" type="email" required autocomplete="off"
-                placeholder="aisg46@amity.edu">
+            <input name="school_email" id="school_email" type="email" required autocomplete="off" placeholder="aisg46@amity.edu">
         </div>
 
         <div class="buttons-div">
@@ -23,60 +21,6 @@
 </div>
 
 <style>
-    .buttons-div {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .inviteForm {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        width: 500px;
-    }
-
-    .inviteForm h2 {
-        color: #16e16e;
-        font-size: 1.3rem;
-        font-weight: 500;
-    }
-
-    .inviteForm h1 {
-        color: #16e16e;
-        font-size: 3rem;
-    }
-
-    .invite {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 80vh;
-    }
-
-    #emailList {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .inviteForm input {
-        width: 500px;
-        height: 3rem;
-        border: 1px solid #999;
-        border-radius: 8px;
-        padding: 5px;
-        padding-left: 20px;
-        background-color: transparent;
-        color: #fff;
-        font-size: 1.3rem;
-        font-weight: 500;
-        margin-top: 8px;
-        margin-bottom: 10px;
-    }
-
     .removable_email {
         display: flex;
         flex-direction: row;
@@ -94,35 +38,7 @@
         margin-left: 1rem;
     }
 
-    #addEmailBtn {
-        background-color: #16e16e;
-        color: #000;
-        border: none;
-        border-radius: 8px;
-        padding: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
-        font-size: 1.3rem;
-        font-weight: 500;
-        cursor: pointer;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
 
-    #inviteSubmitBtn {
-        background-color: #16e16e;
-        color: #000;
-        border: none;
-        border-radius: 8px;
-        padding: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
-        font-size: 1.3rem;
-        font-weight: 500;
-        cursor: pointer;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
 
     @media(max-width:768px) {
         .inviteForm {
@@ -134,6 +50,7 @@
             font-size: 1rem;
             padding-left: 10px;
         }
+
         .inviteForm h1 {
             font-size: 2rem;
         }
@@ -141,9 +58,12 @@
         .inviteForm h3 {
             font-size: 1.2rem;
         }
-        #addEmailBtn, #inviteSubmitBtn {
+
+        #addEmailBtn,
+        #inviteSubmitBtn {
             font-size: 1rem;
         }
+
         .buttons-div {
             width: 80vw;
         }
@@ -167,10 +87,7 @@
         const schName = document.getElementById("school_name");
         const schEmails = document.querySelectorAll("#emailList input");
         let emailList = [];
-        if (schEmails[0].value == "") {
-            notyf.error("Please enter a valid email address");
-            return;
-        }
+
         for (let i = 0; i < schEmails.length; i++) {
             if (schEmails[i].value == "") {
                 continue
