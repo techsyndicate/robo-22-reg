@@ -5,7 +5,8 @@
         <div class="col-1">
             <h3>School Details</h3>
             <input type="text" name="schoolName" placeholder="School Name" required id="schoolName"> <br><br>
-            <input type="link" name="schoolAddress" placeholder="School Address (Google Maps)" required id="schoolAddress"> <br><br>
+            <input type="link" name="schoolAddress" placeholder="School Address (Google Maps)" required
+                id="schoolAddress"> <br><br>
             <input type="email" name="schoolEmail" placeholder="School Email" required id="schoolEmail"><br><br>
             <h3>Club Details</h3>
             <input type="text" name="clubName" placeholder="Club Name" id="clubName"><br><br>
@@ -24,13 +25,124 @@
             <input type="text" name="studentPhone" placeholder="Student Phone" id="studentPhone" required><br><br>
             <input type="password" name="cpassword" placeholder="Confirm Password" required id="cpassword"><br><br>
         </div>
-        <br>
-        <button id="regButton">Register</button>
-
-
-
-
     </form>
+    <div class="password-div">
+        <h3>Password</h3>
+        <div class="pass-inner">
+            <input type="text" name="pass" placeholder="Password" id="pass">
+            <input type="text" name="confpass" placeholder="Confirm Password" id="confpass">
+        </div>
+    </div>
+    <div class="buttons-div" >
+        <button id="regButton">Register</button>
+    </div>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script src="./js/register.js"></script>
+
+<style>
+    .buttons-div {
+        width: 73vw;
+        display: flex;
+        justify-content: flex-end;
+    }
+    #regButton {
+        background-color: #16e16e;
+        color: #000;
+        border: none;
+        border-radius: 8px;
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        font-size: 1.5rem;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 30px;
+        margin-bottom: 50px;
+    }
+
+    .pass-inner {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .password-div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        width: 72vw;
+    }
+
+    .reg {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+    }
+
+    .reg h1 {
+        color: #16e16e;
+        font-size: 3rem;
+    }
+
+    .regForm {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-evenly;
+        width: 95vw;
+        margin-top: 50px;
+    }
+
+    .regForm h3,
+    .password-div h3 {
+        color: #16e16e;
+        font-size: 1.6rem;
+        font-weight: 500;
+    }
+
+    .regForm input,
+    .password-div input {
+        width: 30vw;
+        height: 3rem;
+        border: 1px solid #999;
+        border-radius: 8px;
+        padding: 5px;
+        padding-left: 20px;
+        background-color: transparent;
+        color: #fff;
+        font-size: 1.3rem;
+        font-weight: 500;
+        margin-top: 8px;
+        margin-bottom: 10px;
+    }
+
+    @media(max-width:768px) {
+        .regForm {
+            flex-direction: column;
+            width: 85vw;
+        }
+
+        .regForm input {
+            width: 80vw;
+        }
+
+        .pass-inner {
+            flex-direction: column;
+        }
+
+        .pass-inner input {
+            width: 80vw;
+        }
+
+        .password-div {
+            width: 85vw;
+        }
+    }
+</style>
