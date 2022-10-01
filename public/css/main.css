@@ -4,11 +4,15 @@ body{
     color: white;
     font-family: 'Outfit', sans-serif;
 }
+
+
+
 .invite {
     text-align: center;
 }
 .inviteForm {
-    margin-top: 5vw;
+    margin-top: 1vw;
+    
 }
 .inviteForm input {
     width: 30vw;
@@ -38,7 +42,7 @@ body{
     background-color: #16e16e;
     color: #000;
     border: none;
-    width: 18vw;
+    width: 16vw;
     height: 3vw;
     border-radius: 2vw;
     font-size: 1.25vw;
@@ -46,7 +50,17 @@ body{
     
     margin-bottom: 2vw;
 }
-
+#emailList input {
+    margin-top: 0.7vw;
+    margin-bottom: 0.7vw;
+}
+#addEmailBtn {
+    margin-top: 1.3vw;
+}
+#inviteSubmitBtn {
+    margin-top: 2vw;
+    width: 22vw;
+}
 /* Register School */
 .reg h1 {
     color: #16e16e;

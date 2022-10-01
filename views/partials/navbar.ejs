@@ -2,38 +2,6 @@
 <header class="navbar-container">
     <nav class="navbar">
         <a href="/" class="nav-branding"><img width="50px" src="/assets/ts.png"></a>
-        <div class="nav-most">
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="/invite" class="nav-link">Request Invite</a>
-                </li>
-                <% if (typeof user != "undefined"){ %>
-                <% } else { %>
-                <li class="nav-item">
-                    <a href="/login" class="nav-link">Log In</a>
-                </li>
-                <li class="nav-item sign-button-mobile">
-                    <a href="/register" class="nav-link">Sign Up</a>
-                </li>
-                <% } %>
-
-            </ul>
-            <div class="right-side-nav">
-                <% if (typeof user != "undefined"){ %>
-                <a href="/dashboard"><img width="28px" style="filter:invert(100%)"
-                        src="https://cdn.discordapp.com/attachments/1005877818586038424/1006499498874380359/profile.png"
-                        alt="profile"></a>
-                <% } else { %>
-                <button class="sign-button" onclick="new function(){window.location.href = '/register'};">Sign
-                    up</button>
-                <% } %>
-            </div>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
     </nav>
 </header>
 
@@ -43,6 +11,7 @@
         align-items: center;
         justify-content: space-between;
     }
+
     .sign-button-mobile {
         display: none;
     }
@@ -100,7 +69,7 @@
     }
 
     .nav-menu {
-        margin-right: 2.5vw; 
+        margin-right: 2.5vw;
         display: flex;
         align-items: center;
         gap: 3vw;
