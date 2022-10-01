@@ -47,7 +47,6 @@ regButton.addEventListener("click", (e) => {
     body: JSON.stringify(data),
   })
     .then(async (res) => {
-      console.log(res.status);
       if (res.status === 200) {
         notyf.success("Registration Successful");
         window.location.href = "/register/team";

@@ -252,10 +252,10 @@
         }).then((res) => {
             if (res.status === 200) {
                 notyf.success("Team Updated Successfully");
-
-                setTimeout(() => {
-                    location.reload();
+                setInterval(() => {
+                    location.reload()
                 }, 3000);
+
             } else {
                 notyf.error("Team Registration Failed");
             }

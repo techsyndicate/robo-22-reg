@@ -32,8 +32,9 @@ router.post("/school", async (req, res) => {
   await school.save().then(async (doc) => {
     await jwt.sign({ userId }, process.env.SECRET, (err, token) => {
       if (err) {
-        SendError(err);
         console.log(err);
+        SendError(err);
+
         return res.status(500).send("Some error occurred");
       } else {
         res.cookie("token", token, {
@@ -61,7 +62,7 @@ router.post("/school", async (req, res) => {
       if (err) {
         SendError(err);
         console.log(err);
-        console.log("mail");
+
         return res.status(500).send("Some error occurred");
       } else {
         console.log("Email sent successfully");
@@ -75,12 +76,13 @@ router.get("/team", (req, res) => {
   let token = req.cookies.token;
   jwt.verify(token, process.env.SECRET, (err, decoded) => {
     if (err) {
-      res.render("teamLogin");
+      return res.render("teamLogin");
     } else {
       School.findOne({ userId: decoded.userId }, (err, doc) => {
         if (err) {
           console.log(err);
           SendError(err);
+          return res.render("error");
         } else {
           let schId = doc._id;
           let schName = doc.schoolName;
@@ -108,14 +110,16 @@ router.post("/login", async (req, res) => {
   await School.findOne({ userId }, async (err, doc) => {
     if (err) {
       console.log(err);
-      return SendError(err);
+      SendError(err);
+      return res.status(500).send("Some error occurred");
     } else {
       if (doc) {
         if ((doc.pass = password)) {
           jwt.sign(userId, process.env.SECRET, (err, token) => {
             if (err) {
               console.log(err);
-              return SendError(err);
+              SendError(err);
+              return res.status(500).send("Some error occurred");
             } else {
               res.cookie("token", token);
               return res.status(200).json({ msg: "success" });
