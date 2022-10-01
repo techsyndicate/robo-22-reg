@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+    font-family: 'Outfit', sans-serif;
+}
 body{
     background: black;
     color: white;
-    font-family: 'Outfit', sans-serif;
 }
 .invite {
     text-align: center;
@@ -21,7 +23,6 @@ body{
     font-size: 1vw;
     color: #eee;
     border-radius: 2vw;
-    font-family: 'Outfit', sans-serif;
     transition: all 0.5s ease; 
     font-size: 1.25vw;
 }
@@ -42,8 +43,6 @@ body{
     height: 3vw;
     border-radius: 2vw;
     font-size: 1.25vw;
-    font-family: 'Outfit', sans-serif;
-    
     margin-bottom: 2vw;
 }
 
@@ -62,7 +61,6 @@ body{
     margin-bottom: 0.5vw;
     background-color: #000;
     border: #383737 solid 1px;
-    /* border-bottom: 2px solid #eee; */
     font-size: 1vw;
     color: #eee;
     border-radius: 2vw;
@@ -92,7 +90,6 @@ body{
     
 }
 .reg button {
-    /* text-align: center; */
     margin-left: 33%;
     background-color: #16e16e;
     color: #000;
@@ -101,7 +98,6 @@ body{
     height: 3vw;
     border-radius: 2vw;
     font-size: 1.25vw;
-    font-family: 'Outfit', sans-serif;
     margin-bottom: 2vw;
     margin-top: 2vw;
 }
@@ -126,6 +122,4 @@ body{
         margin: 0;
         
     }
-
-
 }

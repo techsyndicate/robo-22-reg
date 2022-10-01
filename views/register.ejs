@@ -1,34 +1,70 @@
 <div class="reg">
-
-    <h1>Register School</h1>
+    <h1>Registeration</h1>
     <form id="regForm" class="regForm">
         <div class="col-1">
             <h3>School Details</h3>
-            <input type="text" name="schoolName" placeholder="School Name" required id="schoolName"> <br><br>
-            <input type="link" name="schoolAddress" placeholder="School Address (Google Maps)" required id="schoolAddress"> <br><br>
-            <input type="email" name="schoolEmail" placeholder="School Email" required id="schoolEmail"><br><br>
+            <input type="text" name="schoolName" placeholder="School Name" required id="schoolName"> <br>
+            <input type="link" name="schoolAddress" placeholder="School Address (Google Maps)" required
+                id="schoolAddress"> <br>
+            <input type="email" name="schoolEmail" placeholder="School Email" required id="schoolEmail"><br>
             <h3>Club Details</h3>
-            <input type="text" name="clubName" placeholder="Club Name" id="clubName"><br><br>
-            <input type="email" name="clubEmail" placeholder="Club Email" id="clubEmail"><br><br>
-            <input type="link" name="clubWebsite" placeholder="Club Website" id="clubWebsite"><br><br>
-        </div>
-        <div class="col-2">
-            <h3>Teacher Incharge Details</h3>
-            <input type="text" name="teacherName" placeholder="Teacher Name" id="teacherName" required><br><br>
-            <input type="email" name="teacherEmail" placeholder="Teacher Email" id="teacherEmail" required><br><br>
-            <input type="text" name="teacherPhone" placeholder="Teacher Phone" id="teacherPhone" required><br><br>
-            <h3>Student Incharge Details</h3>
-            <input type="text" name="studentName" placeholder="Student Name" id="studentName" required><br><br>
-            <input type="email" name="studentEmail" placeholder="Student Email" id="studentEmail" required><br><br>
-            <input type="text" name="studentPhone" placeholder="Student Phone" id="studentPhone" required><br><br>
-        </div>
-        <br>
-        <button id="regButton">Register</button>
-
-
-
-
+            <input type="text" name="clubName" placeholder="Club Name" id="clubName"><br>
+            <input type="email" name="clubEmail" placeholder="Club Email" id="clubEmail"><br>
+            <input type="link" name="clubWebsite" placeholder="Club Website" id="clubWebsite"><br>
+            <div class="col-2">
+                <h3>Teacher Incharge Details</h3>
+                <input type="text" name="teacherName" placeholder="Teacher Name" id="teacherName" required><br>
+                <input type="email" name="teacherEmail" placeholder="Teacher Email" id="teacherEmail" required><br>
+                <input type="text" name="teacherPhone" placeholder="Teacher Phone" id="teacherPhone" required><br>
+                <h3>Student Incharge Details</h3>
+                <input type="text" name="studentName" placeholder="Student Name" id="studentName" required><br>
+                <input type="email" name="studentEmail" placeholder="Student Email" id="studentEmail" required><br>
+                <input type="text" name="studentPhone" placeholder="Student Phone" id="studentPhone" required><br>
+            </div>
+            <br>
+            <button id="regButton">Register</button>
     </form>
 </div>
+<style>
+    .reg {
+        color: #eee;
+    }
+
+    .reg h1 {
+        font-size: 3.5vw;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        margin: 2vw 4vw;
+    }
+
+    input[type=text],
+    input[type=email],
+    input[type=link] {
+        width: 40vw;
+        height: 3vw;
+        border: none;
+        background-color: transparent;
+        color: #fff;
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        font-size: 1.3vw;
+        font-weight: 500;
+        margin-top: 1vw;
+        border-radius: 5px;
+        margin-bottom: 1vw;
+        padding: 1.5vw;
+        transition: all 0.5s ease;
+        letter-spacing: 1px;
+    }
+
+    input:focus {
+        outline: none;
+        border: 2px solid #16e16e;
+    }
+    
+    .col-1,
+    .col-2{
+        display: flex;
+    }
+</style>
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script src="./js/register.js"></script>

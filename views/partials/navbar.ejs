@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <header class="navbar-container">
     <nav class="navbar">
-        <a href="/" class="nav-branding"><img width="50px" src="/assets/ts.png"></a>
+        <a href="/" class="nav-branding"><img src="/assets/ts.png"></a>
         <div class="nav-most">
             <ul class="nav-menu">
                 <li class="nav-item">
@@ -46,16 +46,20 @@
     .sign-button-mobile {
         display: none;
     }
-
+    .navbar{
+        margin-top: -1.5vw;
+    }
     .sign-button {
         background-color: #00AE40;
         color: white;
         border-radius: 5px;
         width: 140px;
         height: 50px;
-        font-size: 18px;
+        font-size: 1.5vw;
         font-weight: 600;
         cursor: pointer;
+        border: none;
+        margin-top: 2vw;
     }
 
     .right-side-nav {
@@ -73,25 +77,27 @@
     .nav-item {
         list-style: none;
         color: #fff;
+        margin-top: 2vw;
     }
 
     .nav-link,
     .nav-branding {
         text-decoration: none;
         font-weight: 500;
-        font-size: 14px;
         color: #fff;
     }
 
-    .nav-branding {
-        margin-right: 3vw;
+    .nav-branding img{
+        margin: 2vw 2vw;
+        width: 4vw;
+        height: 4vw;
     }
 
     .navbar {
         min-height: 90px;
         display: flex;
         align-items: center;
-        padding: 0 24px;
+        padding: 1.5vw;
         justify-content: space-between;
     }
 
@@ -109,12 +115,20 @@
 
     .nav-link {
         transition: 0.3s ease-out;
+        font-size: 1.5vw;
+        letter-spacing: 1px;
     }
-
-    .nav-link:hover {
-        color: dodgerblue;
+    .nav-link:after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 2.5px;
+        transition: all 0.2s ease;
+        background: #16e16e;
     }
-
+    .nav-link:hover:after {
+        width: 55%;
+    }
     .hamburger {
         display: none;
         cursor: pointer;
