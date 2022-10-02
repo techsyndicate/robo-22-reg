@@ -67,7 +67,7 @@
                 body: JSON.stringify(data)
             })
             .then(async (res) => {
-                if (res.msg === 'success') {
+                if (res.status == 200) {
                     window.location.reload();
                 } else {
                     notyf.error(res.message);

@@ -24,35 +24,51 @@ router.get("/", (req, res) => {
 
 router.get("/team", async (req, res) => {
   let token = req.cookies.token;
-  jwt.verify(token, process.env.SECRET, async (err, decoded) => {
-    if (err) {
-      return res.render("teamLogin");
-    }
-    School.findOne({ userId: decoded }, async (err, doc) => {
-      if (err) {
-        console.log(err);
-        SendError(err);
-        return res.render("error");
-      }
-      let schId = await doc._id;
-      let schName = await doc.schoolName;
-      Team.findOne({ schId }, (err, doc) => {
-        if (err) {
-          console.log(err);
-          SendError(err);
-          return res.render("error");
-        } else {
-          if (doc) {
-            return res.render("team", { team: doc, schId, schName });
-          } else {
-            return res.render("team", { team: null, schId, schName });
-          }
-        }
-      });
-    });
-  });
-});
 
+  if (token) {
+    jwt.verify(token, process.env.SECRET, async (err, decoded) => {
+      if (err) {
+        console.log("user not logged in");
+        console.log(err);
+        return res.render("teamLogin");
+      } else {
+        console.log("decoded ", decoded);
+        await School.findOne({ schoolEmail: decoded })
+          .clone()
+          .catch((err) => {
+            console.log(err);
+            SendError(err);
+            let error = "You havent registered yet";
+            return res.render("error", { error });
+          })
+          .then((school) => {
+            if (school) {
+              let schId = school._id;
+              let schName = school.schoolName;
+              Team.findOne({ schId })
+                .catch((err) => {
+                  console.log(err);
+                  SendError(err);
+                  let error = "You havent registered yet";
+                  return res.render("error", { error });
+                })
+                .then((team) => {
+                  if (team) {
+                    return res.render("team", { team: team, schId, schName });
+                  } else {
+                    return res.render("team", { team: null, schId, schName });
+                  }
+                });
+            } else {
+              return res.render("teamLogin");
+            }
+          });
+      }
+    });
+  } else {
+    return res.render("teamLogin");
+  }
+});
 
 router.post("/school", async (req, res) => {
   const school = new School(req.body);
@@ -106,18 +122,18 @@ router.post("/school", async (req, res) => {
   });
 });
 
-
 router.post("/login", async (req, res) => {
   let { userId, password } = req.body;
-
-  await School.findOne({ userId }, async (err, doc) => {
-    if (err) {
+  School.findOne({ userId })
+    .catch((err) => {
       console.log(err);
       SendError(err);
-      return res.status(500).send("Some error occurred");
-    } else {
-      if (doc) {
-        if ((doc.pass = password)) {
+      let error = "You havent registered yet";
+      return res.status(500).send({ status: 500, message: error });
+    })
+    .then((school) => {
+      if (school) {
+        if ((school.pass = password)) {
           jwt.sign(userId, process.env.SECRET, (err, token) => {
             if (err) {
               console.log(err);
@@ -134,8 +150,7 @@ router.post("/login", async (req, res) => {
       } else {
         return res.status(400).json({ msg: "Invalid User ID" });
       }
-    }
-  }).clone();
+    });
 });
 
 router.post("/team", async (req, res) => {
