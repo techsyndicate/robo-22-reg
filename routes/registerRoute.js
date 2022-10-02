@@ -17,9 +17,42 @@ let mailTransporter = nodemailer.createTransport({
     pass: pass,
   },
 });
+
 router.get("/", (req, res) => {
   res.render("register");
 });
+
+router.get("/team", async (req, res) => {
+  let token = req.cookies.token;
+  jwt.verify(token, process.env.SECRET, async (err, decoded) => {
+    if (err) {
+      return res.render("teamLogin");
+    }
+    School.findOne({ userId: decoded }, async (err, doc) => {
+      if (err) {
+        console.log(err);
+        SendError(err);
+        return res.render("error");
+      }
+      let schId = await doc._id;
+      let schName = await doc.schoolName;
+      Team.findOne({ schId }, (err, doc) => {
+        if (err) {
+          console.log(err);
+          SendError(err);
+          return res.render("error");
+        } else {
+          if (doc) {
+            return res.render("team", { team: doc, schId, schName });
+          } else {
+            return res.render("team", { team: null, schId, schName });
+          }
+        }
+      });
+    });
+  });
+});
+
 
 router.post("/school", async (req, res) => {
   const school = new School(req.body);
@@ -72,38 +105,8 @@ router.post("/school", async (req, res) => {
     });
   });
 });
-router.get("/team", (req, res) => {
-  let token = req.cookies.token;
-  jwt.verify(token, process.env.SECRET, (err, decoded) => {
-    if (err) {
-      return res.render("teamLogin");
-    } else {
-      School.findOne({ userId: decoded.userId }, (err, doc) => {
-        if (err) {
-          console.log(err);
-          SendError(err);
-          return res.render("error");
-        } else {
-          let schId = doc._id;
-          let schName = doc.schoolName;
-          Team.findOne({ schId }, (err, doc) => {
-            if (err) {
-              console.log(err);
-              SendError(err);
-              return res.render("error");
-            } else {
-              if (doc) {
-                return res.render("team", { team: doc, schId, schName });
-              } else {
-                return res.render("team", { team: null, schId, schName });
-              }
-            }
-          });
-        }
-      });
-    }
-  });
-});
+
+
 router.post("/login", async (req, res) => {
   let { userId, password } = req.body;
 
