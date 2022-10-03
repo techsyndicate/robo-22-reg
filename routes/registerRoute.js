@@ -5,6 +5,7 @@ const router = require("express").Router();
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const Team = require("../models/teamModel");
 let email = process.env.GMAIL_USER;
 let pass = process.env.GMAIL_PASS;
 
@@ -16,104 +17,163 @@ let mailTransporter = nodemailer.createTransport({
     pass: pass,
   },
 });
+
 router.get("/", (req, res) => {
   res.render("register");
+});
+
+router.get("/team", async (req, res) => {
+  let token = req.cookies.token;
+
+  if (token) {
+    jwt.verify(token, process.env.SECRET, async (err, decoded) => {
+      if (err) {
+        console.log("user not logged in");
+        console.log(err);
+        return res.render("teamLogin");
+      } else {
+        console.log("decoded ", decoded);
+        await School.findOne({ schoolEmail: decoded })
+          .clone()
+          .catch((err) => {
+            console.log(err);
+            SendError(err);
+            let error = "You havent registered yet";
+            return res.render("error", { error });
+          })
+          .then((school) => {
+            if (school) {
+              let schId = school._id;
+              let schName = school.schoolName;
+              Team.findOne({ schId })
+                .catch((err) => {
+                  console.log(err);
+                  SendError(err);
+                  let error = "You havent registered yet";
+                  return res.render("error", { error });
+                })
+                .then((team) => {
+                  if (team) {
+                    return res.render("team", { team: team, schId, schName });
+                  } else {
+                    return res.render("team", { team: null, schId, schName });
+                  }
+                });
+            } else {
+              return res.render("teamLogin");
+            }
+          });
+      }
+    });
+  } else {
+    return res.render("teamLogin");
+  }
 });
 
 router.post("/school", async (req, res) => {
   const school = new School(req.body);
 
-  await school
-    .save()
-    .then(async (doc) => {
-      console.log(school.schoolName);
-      let userId =
-        school.schoolName.slice(0, 3) +
-        school.studentName.slice(0, 3) +
-        school.teacherName.slice(0, 3);
-      let pass = "UHUHUH";
-      let epass = await bcrypt.hash(pass, 10);
-      jwt.sign(userId, process.env.SECRET, (err, token) => {
-        res.cookie("token", token);
-      });
-      await School.findByIdAndUpdate(doc._id, { userId, pass: epass });
-      let recievers = school.clubEmail
-        ? `${school.clubEmail}, ${school.schoolEmail}`
-        : school.schoolEmail;
-      let mailDetails = {
-        from: email,
-        to: recievers,
-        subject: "Invite for Robotronics 2022",
-        html: await renderFile("views/registerMail.ejs", {
-          userId,
-          password: pass,
-        }),
-      };
+  const token = Math.random().toString(36).substr(2, 16);
+  school.discordCode = token;
+  let userId = req.body.schoolEmail;
+  school.userId = userId;
+  console.log(school);
+  await school.save().then(async (doc) => {
+    await jwt.sign({ userId }, process.env.SECRET, (err, token) => {
+      if (err) {
+        console.log(err);
+        SendError(err);
 
-      mailTransporter.sendMail(mailDetails, function (err, data) {
-        if (err) {
-          SendError(err);
-          console.log(err);
-          return res.status(500).send("Some error occurred");
-        } else {
-          console.log("Email sent successfully");
-          console.log("hello");
-          return res.status(200).json({ msg: "success" });
-        }
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({ status: 500 });
-
-      console.log(err);
-      SendError(err);
+        return res.status(500).send("Some error occurred");
+      } else {
+        res.cookie("token", token, {
+          maxAge: 1000 * 60 * 60 * 24 * 7,
+        });
+      }
     });
-});
-router.get("/team", (req, res) => {
-  let token = req.cookies.token;
-  jwt.verify(token, process.env.SECRET, (err, decoded) => {
-    if (err) {
-      res.render("teamLogin");
-    } else {
-      School.findOne({ userId: decoded }, (err, doc) => {
-        if (err) {
-          console.log(err);
-          SendError(err);
-        } else {
-          res.render("team", { school: doc });
-        }
-      });
-    }
+
+    let recievers = school.clubEmail
+      ? `${school.clubEmail}, ${school.schoolEmail}`
+      : school.schoolEmail;
+
+    let mailDetails = {
+      from: email,
+      to: recievers,
+      subject: "Registration for Robotronics 2022",
+      html: await renderFile("views/registerMail.ejs", {
+        userId,
+        pass,
+        token,
+      }),
+    };
+
+    await mailTransporter.sendMail(mailDetails, function (err, data) {
+      if (err) {
+        SendError(err);
+        console.log(err);
+
+        return res.status(500).send("Some error occurred");
+      } else {
+        console.log("Email sent successfully");
+        console.log("Registration Successful");
+        return res.status(200).send({ status: 200, message: "Registered" });
+      }
+    });
   });
 });
+
 router.post("/login", async (req, res) => {
   let { userId, password } = req.body;
-
-  await School.findOne({ userId }, async (err, doc) => {
-    if (err) {
+  School.findOne({ userId })
+    .catch((err) => {
       console.log(err);
-      return SendError(err);
-    } else {
-      if (doc) {
-        await bcrypt.compare(password, doc.pass, (err, result) => {
-          if (err) {
-            console.log(err);
-            return SendError(err);
-          } else {
-            if (result) {
-              jwt.sign(userId, process.env.SECRET, (err, token) => {
-                res.cookie("token", token);
-                return res.status(200).json({ msg: "success" });
-              });
+      SendError(err);
+      let error = "You havent registered yet";
+      return res.status(500).send({ status: 500, message: error });
+    })
+    .then((school) => {
+      if (school) {
+        if ((school.pass = password)) {
+          jwt.sign(userId, process.env.SECRET, (err, token) => {
+            if (err) {
+              console.log(err);
+              SendError(err);
+              return res.status(500).send("Some error occurred");
             } else {
-              return res.status(400).json({ msg: "Invalid Password" });
+              res.cookie("token", token);
+              return res.status(200).json({ msg: "success" });
             }
-          }
-        });
+          });
+        } else {
+          return res.status(400).json({ msg: "Invalid Password" });
+        }
       } else {
         return res.status(400).json({ msg: "Invalid User ID" });
       }
-    }
-  }).clone();
+    });
+});
+
+router.post("/team", async (req, res) => {
+  let { schId } = req.body;
+
+  const team = await Team.findOne({ schId });
+  if (team) {
+    const team = await Team.findOneAndUpdate({ schId }, req.body).catch(
+      (err) => {
+        console.log(err);
+        SendError(err);
+        return res.status(500).send("Some error occurred");
+      }
+    );
+    return res.status(200).send({ msg: "Updated" });
+  } else {
+    const newTeam = new Team(req.body);
+    const team = await newTeam.save().catch((err) => {
+      console.log(err);
+      SendError(err);
+      return res.status(500).send("Some error occurred");
+    });
+    return res.status(200).send({ msg: "Registered" });
+  }
 });
 module.exports = router;

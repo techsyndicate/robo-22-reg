@@ -6,7 +6,7 @@ const renderFile = (file, data) => {
     ejs.renderFile(file, data, (err, result) => {
       if (err) {
         console.log(err);
-        SendError(err);
+        return SendError(err);
       }
       resolve(result);
     });

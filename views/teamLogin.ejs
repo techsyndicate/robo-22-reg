@@ -1,16 +1,59 @@
-<h1>Login</h1>
+<div class="teamLogin">
 
-<form class="schoolLoginForm">
-    <input name="userId" id="userId" type="text" required autocomplete="off" placeholder="User Id"> <br><br>
-    <input name="password" id="password" type="password" required autocomplete="off" placeholder="Password"> <br><br>
-    <button id="schLoginBtn">Login </button>
-</form>
+    <h1 style="color:#16e16e;">Login</h1>
+
+    <form class="schoolLoginForm">
+        <input name="email" id="email" type="email" required autocomplete="off" placeholder="School Email"> <br><br>
+        <input name="password" id="password" type="password" required autocomplete="off" placeholder="Password"> <br><br>
+        <button id="schLoginBtn">Login </button>
+    </form>
+</div>
+<style>
+    .teamLogin {
+        text-align: center;
+        margin-top: 1vw;
+    }
+
+    .teamLogin h1 {
+        margin-bottom: 2vw;
+    }
+
+    .schoolLoginForm input {
+        width: 30vw;
+        padding: 0.9vw;
+        margin-top: 0.5vw;
+        margin-bottom: 0.5vw;
+        background-color: #000;
+        border: #383737 solid 1px;
+        /* border-bottom: 2px solid #eee; */
+        font-size: 1vw;
+        color: #eee;
+        border-radius: 2vw;
+        font-family: 'Outfit', sans-serif;
+        transition: all 0.5s ease;
+        font-size: 1.25vw;
+    }
+
+    .schoolLoginForm button {
+
+        background-color: #16e16e;
+        color: #000;
+        border: none;
+        width: 18vw;
+        height: 3vw;
+        border-radius: 2vw;
+        font-size: 1.25vw;
+        font-family: 'Outfit', sans-serif;
+        margin-bottom: 2vw;
+        margin-top: 2vw;
+    }
+</style>
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script>
     var notyf = new Notyf()
     document.querySelector("#schLoginBtn").addEventListener("click", (e) => {
         e.preventDefault()
-        var userId = document.querySelector("#userId").value
+        var userId = document.querySelector("#email").value
         var password = document.querySelector("#password").value
         const data = {
             userId,
@@ -23,17 +66,16 @@
                 },
                 body: JSON.stringify(data)
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.msg === 'success') {
-
+            .then(async (res) => {
+                if (res.status == 200) {
                     window.location.reload();
                 } else {
-                    notyf.error(data.message);
+                    notyf.error(res.message);
                 }
             })
             .catch(err => {
                 console.log(err);
+                notyf.error('Some Error occured')
             })
     })
 </script>

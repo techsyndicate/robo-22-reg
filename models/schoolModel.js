@@ -17,8 +17,9 @@ const schoolSchema = new Schema(
     studentName: reqString,
     studentEmail: reqString,
     studentPhone: reqString,
-    userId: nonReqString,
-    pass: nonReqString,
+    userId: reqString,
+    pass: reqString,
+    discordCode: reqString,
   },
   { timestamps: true }
 );

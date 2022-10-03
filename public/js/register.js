@@ -17,6 +17,12 @@ regButton.addEventListener("click", (e) => {
   let studentName = document.getElementById("studentName").value;
   let studentEmail = document.getElementById("studentEmail").value;
   let studentPhone = document.getElementById("studentPhone").value;
+  let pass = document.getElementById("password").value;
+  let cpassword = document.getElementById("cpassword").value;
+  if (pass != cpassword) {
+    notyf.error("Passwords do not match");
+    return;
+  }
   let data = {
     schoolName,
     schoolAddress,
@@ -30,6 +36,7 @@ regButton.addEventListener("click", (e) => {
     studentName,
     studentEmail,
     studentPhone,
+    pass,
   };
 
   fetch("/register/school", {
@@ -39,9 +46,8 @@ regButton.addEventListener("click", (e) => {
     },
     body: JSON.stringify(data),
   })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.msg === "success") {
+    .then(async (res) => {
+      if (res.status === 200) {
         notyf.success("Registration Successful");
         window.location.href = "/register/team";
       } else {
