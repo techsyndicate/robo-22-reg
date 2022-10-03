@@ -4,8 +4,8 @@
         <button id="logoutbtn">Log Out</button>
     </div>
     <form class="teamForm">
-        <input name="schId" id="schId" hidden value="<%= schId %>">
-        <input name="schName" id="schName" hidden value="<%= schName %>">
+        <p name="schName" id="schName">School Name: <%= schName %></p>
+        <p name="schName" id="schName">Discord Code: <%= code %></p>
         <div class="col-container">
             <% if (!team) { %>
             <div class="col-1">
@@ -179,6 +179,9 @@
         font-family: 'Outfit', sans-serif;
     }
 
+    p {
+        font-size: 1.5rem;
+    }
     .col-1,
     .col-2 {
         display: flex;
@@ -266,6 +269,10 @@
     }
 
     @media screen and (max-width: 768px) {
+        p {
+            font-size: 1rem;
+            height: 1vh;
+        }
         .col-container {
             flex-direction: column;
         }
