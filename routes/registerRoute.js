@@ -42,8 +42,7 @@ router.get("/team", async (req, res) => {
         } else {
           mail = decoded;
         }
-        console.log(decoded);
-        console.log(mail);
+
         await School.findOne({ schoolEmail: mail })
           .clone()
           .catch((err) => {
@@ -56,6 +55,7 @@ router.get("/team", async (req, res) => {
             if (school) {
               let schId = school._id;
               let schName = school.schoolName;
+              let code = school.discordCode;
               Team.findOne({ schId })
                 .catch((err) => {
                   console.log(err);
@@ -65,9 +65,19 @@ router.get("/team", async (req, res) => {
                 })
                 .then((team) => {
                   if (team) {
-                    return res.render("team", { team: team, schId, schName });
+                    return res.render("team", {
+                      team: team,
+                      schId,
+                      schName,
+                      code,
+                    });
                   } else {
-                    return res.render("team", { team: null, schId, schName });
+                    return res.render("team", {
+                      team: null,
+                      schId,
+                      schName,
+                      code,
+                    });
                   }
                 });
             } else {
