@@ -38,6 +38,8 @@ router.get("/team", async (req, res) => {
         } else {
           mail = decoded;
         }
+        console.log(decoded);
+        console.log(mail);
         await School.findOne({ schoolEmail: mail })
           .clone()
           .catch((err) => {
@@ -84,7 +86,7 @@ router.post("/school", async (req, res) => {
 
   school.userId = userId;
   await school.save().then(async (doc) => {
-    await jwt.sign({ userId }, process.env.SECRET, (err, token) => {
+    await jwt.sign( userId , process.env.SECRET, (err, token) => {
       if (err) {
         console.log(err);
         SendError(err);
