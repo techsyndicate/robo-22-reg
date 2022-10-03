@@ -90,7 +90,6 @@ router.post("/school", async (req, res) => {
       if (err) {
         console.log(err);
         SendError(err);
-
         return res.status(500).send("Some error occurred");
       } else {
         res.cookie("token", token, {
@@ -118,7 +117,6 @@ router.post("/school", async (req, res) => {
       if (err) {
         SendError(err);
         console.log(err);
-
         return res.status(500).send("Some error occurred");
       } else {
         console.log("Email sent successfully");

@@ -1,21 +1,22 @@
 
+const { Client, GatewayIntentBits } = require('discord.js');
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const { InteractionHandler } = require('./commandHandler');
+
+//discord
+client.on('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.on('rateLimit', (info) => {
+    console.log(info);
+});
+
+client.on('interactionCreate', async interaction => {
+    await InteractionHandler(interaction);
+});
+
 function discord() {
-    //discord
-    const { Client, GatewayIntentBits } = require('discord.js');
-    const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
-    client.on('ready', () => {
-        console.log(`Logged in as ${client.user.tag}!`);
-    });
-
-    client.on('interactionCreate', async interaction => {
-        if (!interaction.isChatInputCommand()) return;
-
-        if (interaction.commandName === 'ping') {
-            await interaction.reply('Pong!');
-        }
-    });
-    
     client.login(process.env.DISCORD_TOKEN);
 }
 
