@@ -98,34 +98,34 @@ router.post("/school", async (req, res) => {
         });
       }
     });
-    await addSchool(school);
-    // let recievers = school.clubEmail
-    //   ? `${school.clubEmail}, ${school.schoolEmail}`
-    //   : school.schoolEmail;
+    // await addSchool(school);
+    let recievers = school.clubEmail
+      ? `${school.clubEmail}, ${school.schoolEmail}`
+      : school.schoolEmail;
 
-    // let mailDetails = {
-    //   from: email,
-    //   to: recievers,
-    //   subject: "Registration for Robotronics 2022",
-    //   html: await renderFile("views/registerMail.ejs", {
-    //     userId,
-    //     pass,
-    //     token,
-    //   }),
-    // };
+    let mailDetails = {
+      from: email,
+      to: recievers,
+      subject: "Registration for Robotronics 2022",
+      html: await renderFile("views/registerMail.ejs", {
+        userId,
+        pass,
+        token,
+      }),
+    };
 
-    // await mailTransporter.sendMail(mailDetails, function (err, data) {
-    //   if (err) {
-    //     SendError(err);
-    //     console.log(err);
+    await mailTransporter.sendMail(mailDetails, function (err, data) {
+      if (err) {
+        SendError(err);
+        console.log(err);
 
-    //     return res.status(500).send("Some error occurred");
-    //   } else {
-    //     console.log("Email sent successfully");
-    //     console.log("Registration Successful");
-    //     return res.status(200).send({ status: 200, message: "Registered" });
-    //   }
-    // });
+        return res.status(500).send("Some error occurred");
+      } else {
+        console.log("Email sent successfully");
+        console.log("Registration Successful");
+        return res.status(200).send({ status: 200, message: "Registered" });
+      }
+    });
   });
 });
 

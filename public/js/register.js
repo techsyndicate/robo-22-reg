@@ -49,7 +49,9 @@ regButton.addEventListener("click", (e) => {
     .then(async (res) => {
       if (res.status === 200) {
         notyf.success("Registration Successful");
-        window.location.href = "/register/team";
+        setTimeout(() => {
+          window.location.href = "/register/team";
+        }, 2000);
       } else {
         notyf.error("Registration Failed");
       }

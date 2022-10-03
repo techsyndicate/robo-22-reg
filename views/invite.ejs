@@ -4,14 +4,12 @@
         <br>
         <h2>School Name</h2>
 
-        <input name="school_name" id="school_name" type="text" required autocomplete="off"
-            placeholder="Amity International School, Sector-46, Gurgraon"> <br>
+        <input name="school_name" id="school_name" type="text" required autocomplete="off" placeholder="Amity International School, Sector-46, Gurgraon"> <br>
 
         <h2>School Email</h2>
 
         <div id="emailList">
-            <input name="school_email" id="school_email" type="email" required autocomplete="off"
-                placeholder="aisg46@amity.edu">
+            <input name="school_email" id="school_email" type="email" required autocomplete="off" placeholder="aisg46@amity.edu">
         </div>
         <br>
         <div class="buttons-div">
@@ -163,10 +161,10 @@
 </style>
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script>
-    // var notyf = new Notyf();
+    var notyf = new Notyf();
     var emails = 0; // stores number of emails user added
 
-    //email validator
+    //email validator   
     function ValidateEmail(email) {
         const re =
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -202,13 +200,16 @@
                     schEmails: emailList
                 }),
             }).then(async (res) => {
-                // if (res.status === 200) {
-                //  //   notyf.success("Invite Sent");
-                // } else {
-                //     notyf.error("some error occurred");
-                // }
-                var first = await res
-                console.log(first)
+                if (res.status === 200) {
+                    notyf.success("Invites sent successfully");
+                    setTimeout(() => {
+                        window.location.href = "/"
+                    }, 3000)
+
+                } else {
+                    notyf.error("some error occurred");
+                }
+
             });
         }
     });
