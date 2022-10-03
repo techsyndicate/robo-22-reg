@@ -262,7 +262,8 @@
             }
         });
     });
-    document.getElementById("#logoutbtn").addEventListener('click', (e) => {
+    let logoutBtn = document.querySelector("#logoutBtn");
+    logoutBtn.addEventListener('click', (e) => {
         e.preventDefault()
         fetch('/logout', {
             method: 'POST',
