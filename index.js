@@ -20,10 +20,12 @@ app.use(cookieParser());
 const indexRouter = require("./routes/indexRoute");
 const inviteRouter = require("./routes/inviteRoute");
 const registerRouter = require("./routes/registerRoute");
+const discordRouter = require("./routes/discordRoute");
 
 app.use(indexRouter);
 app.use("/invite", inviteRouter);
 app.use("/register", registerRouter);
+// app.use("/discord", discordRouter);
 // discord();
 
 const pass = process.env.MONGO_PASS;
