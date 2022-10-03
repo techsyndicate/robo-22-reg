@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+*{
+    font-family: 'Outfit', sans-serif;
+}
 body{
     background: black;
     color: white;
-    font-family: 'Outfit', sans-serif;
 }
 
 
@@ -25,7 +27,6 @@ body{
     font-size: 1vw;
     color: #eee;
     border-radius: 2vw;
-    font-family: 'Outfit', sans-serif;
     transition: all 0.5s ease; 
     font-size: 1.25vw;
 }
@@ -46,8 +47,6 @@ body{
     height: 3vw;
     border-radius: 2vw;
     font-size: 1.25vw;
-    font-family: 'Outfit', sans-serif;
-    
     margin-bottom: 2vw;
 }
 #emailList input {
@@ -62,6 +61,9 @@ body{
     width: 22vw;
 }
 /* Register School */
+.reg{
+    padding-bottom: 5vw;
+}
 .reg h1 {
     color: #16e16e;
     font-size: 3vw;   
@@ -76,19 +78,17 @@ body{
     margin-top: 0.5vw;
     margin-bottom: 0.5vw;
     background-color: #000;
-    border: #383737 solid 1px;
-    /* border-bottom: 2px solid #eee; */
+    border: 2px solid rgba(255, 255, 255, 0.15);
     font-size: 1vw;
     color: #eee;
-    border-radius: 2vw;
-    font-family: 'Outfit', sans-serif;
+    border-radius: 5px;
     transition: all 0.5s ease; 
     font-size: 1.25vw;
 }
 
 .reg input:focus {
     outline: none;
-    border-bottom: 2px solid #16e16e;
+    border: 2px solid #16e16e;
 }
 .reg h3 {
     font-size: 2vw;
@@ -107,20 +107,20 @@ body{
     
 }
 .reg button {
-    /* text-align: center; */
-    margin-left: 33%;
     background-color: #16e16e;
-    color: #000;
+    color: #111;
+    border-radius: 5px;
+    font-size: 1.35vw;
+    font-weight: 400;
+    min-height: 3.5vw ;
+    cursor: pointer;
+    width: 30vw;
     border: none;
-    width: 18vw;
-    height: 3vw;
-    border-radius: 2vw;
-    font-size: 1.25vw;
-    font-family: 'Outfit', sans-serif;
-    margin-bottom: 2vw;
-    margin-top: 2vw;
+    margin-top: 2.5vw;
 }
-
+.reg button:focus{
+    outline: none;
+}
 
 @media screen and (max-width: 600px) {
     .col-1, .col-2 {
@@ -141,11 +141,4 @@ body{
         margin: 0;
         
     }
-}
-
-
-/* team */
-
-.teamLogin {
-    background-color: white;
 }

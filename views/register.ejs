@@ -1,30 +1,30 @@
 <div class="reg">
-
-    <h1>Register School</h1>
-    <form id="regForm" class="regForm">
+    <h1>Registeration</h1>
+    <form id="regForm" class="regForm" autocomplete="off">
         <div class="col-1">
             <h3>School Details</h3>
-            <input type="text" name="schoolName" placeholder="School Name" required id="schoolName"> <br><br>
-            <input type="link" name="schoolAddress" placeholder="School Address (Google Maps)" required id="schoolAddress"> <br><br>
-            <input type="email" name="schoolEmail" placeholder="School Email" required id="schoolEmail"><br><br>
+            <input type="text" name="schoolName" placeholder="School Name" required id="schoolName"> <br>
+            <input type="link" name="schoolAddress" placeholder="School Address (Google Maps)" required
+                id="schoolAddress"> <br>
+            <input type="email" name="schoolEmail" placeholder="School Email" required id="schoolEmail"><br>
             <h3>Club Details</h3>
-            <input type="text" name="clubName" placeholder="Club Name" id="clubName"><br><br>
-            <input type="email" name="clubEmail" placeholder="Club Email" id="clubEmail"><br><br>
-            <input type="link" name="clubWebsite" placeholder="Club Website" id="clubWebsite"><br><br>
+            <input type="text" name="clubName" placeholder="Club Name" id="clubName"><br>
+            <input type="email" name="clubEmail" placeholder="Club Email" id="clubEmail"><br>
+            <input type="link" name="clubWebsite" placeholder="Club Website" id="clubWebsite"><br>
             <h3>Password</h3>
-            <input type="password" name="password" placeholder="Password" required id="password"><br><br>
+            <input type="password" name="password" placeholder="Password" required id="password"><br>
         </div>
         <div class="col-2">
             <h3>Teacher Incharge Details</h3>
-            <input type="text" name="teacherName" placeholder="Teacher Name" id="teacherName" required><br><br>
-            <input type="email" name="teacherEmail" placeholder="Teacher Email" id="teacherEmail" required><br><br>
-            <input type="text" name="teacherPhone" placeholder="Teacher Phone" id="teacherPhone" required><br><br>
+            <input type="text" name="teacherName" placeholder="Teacher Name" id="teacherName" required><br>
+            <input type="email" name="teacherEmail" placeholder="Teacher Email" id="teacherEmail" required><br>
+            <input type="text" name="teacherPhone" placeholder="Teacher Phone" id="teacherPhone" required><br>
             <h3>Student Incharge Details</h3>
-            <input type="text" name="studentName" placeholder="Student Name" id="studentName" required><br><br>
-            <input type="email" name="studentEmail" placeholder="Student Email" id="studentEmail" required><br><br>
-            <input type="text" name="studentPhone" placeholder="Student Phone" id="studentPhone" required><br><br>
+            <input type="text" name="studentName" placeholder="Student Name" id="studentName" required><br>
+            <input type="email" name="studentEmail" placeholder="Student Email" id="studentEmail" required><br>
+            <input type="text" name="studentPhone" placeholder="Student Phone" id="studentPhone" required><br>
             <h3>Confirm Password</h3>
-            <input type="password" name="cpassword" placeholder="Confirm Password" required id="cpassword"><br><br>
+            <input type="password" name="cpassword" placeholder="Confirm Password" required id="cpassword"><br>
         </div>
     </form>
 
@@ -37,6 +37,9 @@
 <script src="./js/register.js"></script>
 
 <style>
+    h3{
+        letter-spacing: 1px;
+    }
     @media(max-width:768px) {
         .regForm {
             flex-direction: column;
