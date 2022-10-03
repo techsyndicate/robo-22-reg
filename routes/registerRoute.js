@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Team = require("../models/teamModel");
 const json2csv = require("json2csv");
+const { ValidateEmail } = require("../services/misc");
 
 // const { addSchool } = require("../services/sheets");
 let email = process.env.GMAIL_USER;
@@ -81,8 +82,45 @@ router.get("/team", async (req, res) => {
 });
 
 router.post("/school", async (req, res) => {
-  const school = new School(req.body);
+  console.log(req.body);
+  if (
+    !req.body.schoolName ||
+    !req.body.schoolAddress ||
+    !req.body.schoolEmail ||
+    !req.body.teacherName ||
+    !req.body.teacherEmail ||
+    !req.body.teacherPhone ||
+    !req.body.studentName ||
+    !req.body.studentEmail ||
+    !req.body.studentPhone ||
+    !req.body.pass
+  ) {
+    console.log("missing fied");
+    return res.status(400).send({ msg: "Please fill all the fields" });
+  } else if (
+    !ValidateEmail(req.body.schoolEmail) ||
+    !ValidateEmail(req.body.teacherEmail) ||
+    !ValidateEmail(req.body.studentEmail)
+  ) {
+    console.log("invalid field");
+    return res.status(400).send({ msg: "Invalid Email" });
+  } else if (
+    req.body.studentPhone.length < 10 ||
+    req.body.teacherPhone.length < 10 ||
+    req.body.studentPhone.length > 13 ||
+    req.body.teacherPhone.length > 13
+  ) {
+    console.log("invalid phone");
+    return res.status(400).send({ msg: "Invalid Phone Number" });
+  }
 
+  if (req.body.clubEmail) {
+    if (!ValidateEmail(req.body.clubEmail)) {
+      return res.status(400).send({ msg: "Invalid Email" });
+    }
+  }
+
+  const school = new School(req.body);
   const token = Math.random().toString(36).substr(2, 16);
   school.discordCode = token;
   let userId = req.body.schoolEmail;
@@ -111,7 +149,7 @@ router.post("/school", async (req, res) => {
       subject: "Registration for Robotronics 2022",
       html: await renderFile("views/registerMail.ejs", {
         userId,
-        spass,
+        pass: spass,
         token,
       }),
     };

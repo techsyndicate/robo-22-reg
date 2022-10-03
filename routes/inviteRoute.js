@@ -21,10 +21,14 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  console.log("hello");
   const { schName, schEmails } = req.body;
   if (!schName && !schEmails) {
     return res.status(400).send("Please fill all the fields");
+  }
+  for (let i = 0; i < schEmails.length; i++) {
+    if (!ValidateEmail(schEmails[i])) {
+      return res.status(400).send("Invalid Email");
+    }
   }
 
   recievers = schEmails.join(",");
