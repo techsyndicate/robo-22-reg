@@ -24,7 +24,7 @@ const registerRouter = require("./routes/registerRoute");
 app.use(indexRouter);
 app.use("/invite", inviteRouter);
 app.use("/register", registerRouter);
-discord();
+// discord();
 
 const pass = process.env.MONGO_PASS;
 const link = `mongodb+srv://techsyndicate:${pass}@cluster0.cjudlqb.mongodb.net/test`;
