@@ -15,7 +15,7 @@ function discord() {
             await interaction.reply('Pong!');
         }
     });
-
+    
     client.login(process.env.DISCORD_TOKEN);
 }
 

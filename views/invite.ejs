@@ -4,12 +4,14 @@
         <br>
         <h2>School Name</h2>
 
-        <input name="school_name" id="school_name" type="text" required autocomplete="off" placeholder="Amity International School, Sector-46, Gurgraon"> <br>
+        <input name="school_name" id="school_name" type="text" required autocomplete="off"
+            placeholder="Amity International School, Sector-46, Gurgraon"> <br>
 
         <h2>School Email</h2>
 
         <div id="emailList">
-            <input name="school_email" id="school_email" type="email" required autocomplete="off" placeholder="aisg46@amity.edu">
+            <input name="school_email" id="school_email" type="email" required autocomplete="off"
+                placeholder="aisg46@amity.edu">
         </div>
         <br>
         <div class="buttons-div">
@@ -30,7 +32,8 @@
         min-height: 80vh;
 
     }
-    .inviteForm{
+
+    .inviteForm {
         margin-top: -2vw;
     }
 
@@ -40,10 +43,12 @@
         text-align: left;
         letter-spacing: 1.5px;
     }
-    .inviteForm h2{
+
+    .inviteForm h2 {
         letter-spacing: 1.45px;
         text-align: left;
     }
+
     .invite {
         display: flex;
         flex-direction: column;
@@ -59,7 +64,7 @@
     }
 
     input[type=text],
-    input[type=email]{
+    input[type=email] {
         width: 40vw;
         height: 3vw;
         border: none;
@@ -75,19 +80,22 @@
         transition: all 0.5s ease;
         letter-spacing: 1px;
     }
-    input:focus{
+
+    input:focus {
         outline: none;
         border: 2px solid #16e16e;
     }
+
     .removable_email {
         display: flex;
         flex-direction: row;
         align-items: center;
-    }   
-    
+    }
+
     .buttons-div {
         width: 100%;
     }
+
     .remove_button {
         background-color: transparent !important;
         cursor: pointer;
@@ -130,23 +138,26 @@
             width: 80vw;
         }
     }
+
     #addEmailBtn,
-    #inviteSubmitBtn{
+    #inviteSubmitBtn {
         background-color: #16e16e;
         color: #111;
         border-radius: 5px;
         font-size: 1.35vw;
         font-weight: 400;
-        min-height: 3.5vw ;
+        min-height: 3.5vw;
         cursor: pointer;
         width: 100%;
         border: none;
         margin-top: .5vw;
     }
+
     ::-webkit-scrollbar {
         width: 10px;
     }
-    .removable_email{
+
+    .removable_email {
         margin-top: 1vw;
     }
 </style>
@@ -207,21 +218,23 @@
         e.preventDefault();
         const emailList = document.getElementById("emailList");
         //convert html to dom node element
-        const input = document.createRange().createContextualFragment(`<div class="removable_email"><input name="school_email"
-        id="school_email${emails + 1}" type="email" required autocomplete="off" placeholder="aisg46@amity.edu">
-        <button class="remove_button" id="school_email_button_${emails + 1}"><img src="/assets/close.svg" style="transform: scale(0.7);"></button><div>`);
+        const input = document.createRange().createContextualFragment(
+            `<div class="removable_email" id="removable_email${emails + 1}">
+                <input name="school_email" id="school_email" type="email" required autocomplete="off" placeholder="aisg46@amity.edu">
+                <button class="remove_button" id="school_email_button_${emails + 1}" onclick="email_remove('school_email_button_${emails + 1}')">
+                    <img src="/assets/close.svg" style="transform: scale(0.7);">
+                </button>
+            <div>`);
         emails++;
         console.log(input)
         emailList.appendChild(input);
     });
 
-    document.addEventListener("click", (e) => {
-        if (e.target.id.includes("school_email_button")) {
-            const id = e.target.id.split("_")[3];
-            console.log(id);
-            const email = document.getElementById(`school_email${id}`);
-            email.remove();
-            e.target.remove();
-        }
-    });
+
+    function email_remove(id) {
+        console.log(id);
+        const email_div = document.getElementById(`removable_email${id.split("_")[3]}`);
+        email_div.remove();
+        return false;
+    }
 </script>
