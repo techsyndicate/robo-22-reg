@@ -86,7 +86,7 @@ router.post("/school", async (req, res) => {
   const token = Math.random().toString(36).substr(2, 16);
   school.discordCode = token;
   let userId = req.body.schoolEmail;
-
+  let spass = school.pass;
   school.userId = userId;
   await school.save().then(async (doc) => {
     await jwt.sign(userId, process.env.SECRET, (err, token) => {
@@ -111,7 +111,7 @@ router.post("/school", async (req, res) => {
       subject: "Registration for Robotronics 2022",
       html: await renderFile("views/registerMail.ejs", {
         userId,
-        pass,
+        spass,
         token,
       }),
     };
