@@ -138,26 +138,26 @@ router.post("/login", async (req, res) => {
       console.log(err);
       SendError(err);
       let error = "You havent registered yet";
-      return res.status(500).send({ status: 500, message: error });
+      return res.send({ msg: error });
     })
     .then((school) => {
       if (school) {
-        if ((school.pass = password)) {
+        if (school.pass == password) {
           jwt.sign(userId, process.env.SECRET, (err, token) => {
             if (err) {
               console.log(err);
               SendError(err);
-              return res.status(500).send("Some error occurred");
+              return res.send("Some error occurred");
             } else {
               res.cookie("token", token);
-              return res.status(200).json({ msg: "success" });
+              return res.status(200).send({ msg: "success" });
             }
           });
         } else {
-          return res.status(400).json({ msg: "Invalid Password" });
+          return res.send({ msg: "Invalid Password" });
         }
       } else {
-        return res.status(400).json({ msg: "Invalid User ID" });
+        return res.send({ msg: "Invalid User ID" });
       }
     });
 });
