@@ -5,6 +5,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const layouts = require("express-ejs-layouts");
 const { SendError } = require("./services/error");
+const { discord } = require("./discord/discordMain");
 const cookieParser = require("cookie-parser");
 
 const app = express();
@@ -23,6 +24,7 @@ const registerRouter = require("./routes/registerRoute");
 app.use(indexRouter);
 app.use("/invite", inviteRouter);
 app.use("/register", registerRouter);
+discord();
 
 const pass = process.env.MONGO_PASS;
 const link = `mongodb+srv://techsyndicate:${pass}@cluster0.cjudlqb.mongodb.net/test`;
