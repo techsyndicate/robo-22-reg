@@ -9,34 +9,52 @@
             <button onclick="register()">Register</button>
             <button onclick="team()">Edit Team</button>
         </div>
+        <div class="exception-div buttons-div">
+            <button class="exception" onclick="regIndi()">Register independently</button>
+        </div>
+
     </div>
     <img src="/assets/illus.svg">
 </div>
 <style>
-    .landing{
+    .exception-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px !important;
+    }
+    .exception {
+        width: 20vw !important;
+    }
+    .landing {
         display: flex;
         margin-top: 5vw;
         align-items: center;
         justify-content: center;
     }
-    img{
+
+    img {
         width: 40vw;
         margin-left: 5vw;
     }
-    .landing-content h1{
+
+    .landing-content h1 {
         font-size: 5vw;
         letter-spacing: 1px;
-        margin-top : 3.5vw;
+        margin-top: 3.5vw;
     }
-    .landing-content p{
+
+    .landing-content p {
         font-size: 1.5vw;
-        color: rgba(255,255,255,0.5);
+        color: rgba(255, 255, 255, 0.5);
         margin-top: 2.5vw;
     }
-    .buttons-div{
+
+    .buttons-div {
         margin-top: 5vw;
     }
-    .landing button{
+
+    .landing button {
         cursor: pointer;
         border: none;
         border-radius: 10px;
@@ -47,28 +65,44 @@
         margin-right: 2.5vw;
         font-size: 1.25vw;
     }
-    @media only screen and (max-width: 768px){
-        .landing{
+
+    @media only screen and (max-width: 768px) {
+        .exception {
+            width: 90vw !important;
+        }
+        .exception-div {
+            width: 100%;
+            display: grid;
+            justify-self: unset !important;
+            align-items: unset !important;
+            margin-top: 0px !important;
+        }
+        .landing {
             display: block;
         }
-        h1{
+
+        h1 {
             font-size: 10vw !important;
             margin-left: 2.5vw;
         }
-        p{
+
+        p {
             margin-left: 2.5vw;
             font-size: 5vw !important;
         }
-        .buttons-div{
+
+        .buttons-div {
             display: grid;
         }
-        button{
-            width: 90% !important;
+
+        .exception, button {
+            width: 90vw !important;
             margin-top: 5vw;
             font-size: 4.5vw !important;
             margin-left: 2.5vw !important;
         }
-        .landing img{
+
+        .landing img {
             transform: scale(7.5);
             margin: 35vw 40vw;
         }
@@ -83,5 +117,9 @@
     }
     const team = () => {
         window.location.href = '/register/team'
+    }
+    const regIndi = () => {
+        let notyf = new Notyf();
+        notyf.success('Commming Soon!');
     }
 </script>
