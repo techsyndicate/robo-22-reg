@@ -1,51 +1,82 @@
-<div class="teamLogin">
+<div class="team">
+    <div class="teamLogin">
 
-    <h1 style="color:#16e16e;">Login</h1>
-
-    <form class="schoolLoginForm">
-        <input name="email" id="email" type="email" required autocomplete="off" placeholder="School Email"> <br><br>
-        <input name="password" id="password" type="password" required autocomplete="off" placeholder="Password"> <br><br>
-        <button id="schLoginBtn">Login </button>
-    </form>
+        
+    
+        <form class="schoolLoginForm" autocomplete="off">
+            <h1 style="color:#16e16e;">Login</h1>
+            <h2>
+                Email
+            </h2>
+            <input name="email" id="email" type="email" required autocomplete="OFF" placeholder="School Email"> <br><br>
+            <h2>
+                Password
+            </h2>
+            <input name="password" id="password" type="password" required autocomplete="OFF" placeholder="Password"> <br><br>
+            <button id="schLoginBtn">Login </button>
+        </form>
+    </div>
 </div>
 <style>
-    .teamLogin {
-        text-align: center;
-        margin-top: 1vw;
+    h2{
+        letter-spacing: 1.45px;
+        text-align: left;
     }
-
-    .teamLogin h1 {
-        margin-bottom: 2vw;
-    }
-
-    .schoolLoginForm input {
-        width: 30vw;
-        padding: 0.9vw;
-        margin-top: 0.5vw;
-        margin-bottom: 0.5vw;
-        background-color: #000;
-        border: #383737 solid 1px;
-        /* border-bottom: 2px solid #eee; */
-        font-size: 1vw;
+    .team {
+        display: flex;
+        flex-direction: column;
         color: #eee;
-        border-radius: 2vw;
-        font-family: 'Outfit', sans-serif;
-        transition: all 0.5s ease;
-        font-size: 1.25vw;
+        margin-top: -5vw;
+        height: 80vh;
+        overflow-y: scroll;
+        min-height: 80vh;
     }
-
-    .schoolLoginForm button {
-
+    .teamLogin
+        {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+    }
+    .teamLogin button{
         background-color: #16e16e;
-        color: #000;
+        color: #111;
+        border-radius: 5px;
+        font-size: 1.35vw;
+        font-weight: 400;
+        min-height: 3.5vw ;
+        cursor: pointer;
+        width: 100%;
         border: none;
-        width: 18vw;
+        margin-top: .5vw;
+    }
+    input[type=password],
+    input[type=email]{
+        width: 40vw;
         height: 3vw;
-        border-radius: 2vw;
-        font-size: 1.25vw;
-        font-family: 'Outfit', sans-serif;
-        margin-bottom: 2vw;
-        margin-top: 2vw;
+        border: none;
+        background-color: transparent;
+        color: #fff;
+        border: 2px solid rgba(255, 255, 255, 0.15);
+        font-size: 1.3vw;
+        font-weight: 500;
+        margin-top: .5vw;
+        border-radius: 5px;
+        margin-bottom: .5vw;
+        padding: 1.5vw;
+        transition: all 0.5s ease;
+        letter-spacing: 1px;
+    }
+    input:focus{
+        outline: none;
+        border: 2px solid #16e16e;
+    }
+    h1{
+        font-size: 3.5vw;
+        font-weight: 800;
+        text-align: left;
+        letter-spacing: 1.5px;
     }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
