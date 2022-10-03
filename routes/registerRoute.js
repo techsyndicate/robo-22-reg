@@ -32,8 +32,13 @@ router.get("/team", async (req, res) => {
         console.log(err);
         return res.render("teamLogin");
       } else {
-        console.log("decoded ", decoded);
-        await School.findOne({ schoolEmail: decoded })
+        let mail = "";
+        if (typeof decoded == "object") {
+          mail = decoded.userId;
+        } else {
+          mail = decoded;
+        }
+        await School.findOne({ schoolEmail: mail })
           .clone()
           .catch((err) => {
             console.log(err);
@@ -76,8 +81,8 @@ router.post("/school", async (req, res) => {
   const token = Math.random().toString(36).substr(2, 16);
   school.discordCode = token;
   let userId = req.body.schoolEmail;
+
   school.userId = userId;
-  console.log(school);
   await school.save().then(async (doc) => {
     await jwt.sign({ userId }, process.env.SECRET, (err, token) => {
       if (err) {
