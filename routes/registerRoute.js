@@ -6,7 +6,9 @@ const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Team = require("../models/teamModel");
-const { addSchool } = require("../services/sheets");
+const json2csv = require("json2csv");
+
+// const { addSchool } = require("../services/sheets");
 let email = process.env.GMAIL_USER;
 let pass = process.env.GMAIL_PASS;
 
@@ -98,7 +100,7 @@ router.post("/school", async (req, res) => {
         });
       }
     });
-    await addSchool(school);
+    // await addSchool(school);
     // let recievers = school.clubEmail
     //   ? `${school.clubEmail}, ${school.schoolEmail}`
     //   : school.schoolEmail;
@@ -183,4 +185,37 @@ router.post("/team", async (req, res) => {
     return res.status(200).send({ msg: "Registered" });
   }
 });
+
+// router.get('/csv', async(req, res) => {
+//   const schools = await School.find();
+//   const teams = await Team.find();
+//   let data = [];
+//   for(let i = 0; i < schools.length; i++) {
+//     let school = schools[i]._doc;
+//     let team = teams.find(team => team.schId == school._id);
+//     school = JSON.parse(JSON.stringify(school));
+//     delete school._id;
+//     delete school.__v;
+//     if(team) {
+//       team = team._doc;
+//       team = JSON.parse(JSON.stringify(team));
+//       delete team.schId;
+//       delete team._id;
+//       delete team.__v;
+//       data.push({
+//         ...school,
+//         ...team
+//       })
+//     }
+//     else  {
+//     data.push({...school});
+//     }
+//   }
+//   console.log(data);
+//   const csv = json2csv.parse(data);
+//   res.setHeader('Content-Type', 'text/csv');
+//   res.setHeader('Content-Disposition', 'attachment; filename="robotronics.csv"');
+//   res.status(200).send(csv);
+// })
+
 module.exports = router;
