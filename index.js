@@ -25,8 +25,12 @@ const discordRouter = require("./routes/discordRoute");
 app.use(indexRouter);
 app.use("/invite", inviteRouter);
 app.use("/register", registerRouter);
-// app.use("/discord", discordRouter);
-// discord();
+if (process.env.DISCORD_ENABLED == "true") {
+  discord();
+}
+if (process.env.DISCORD_ADMIN_ENABLED == "true") {
+  app.use("/discord", discordRouter);
+}
 
 const pass = process.env.MONGO_PASS;
 const link = `mongodb+srv://techsyndicate:${pass}@cluster0.cjudlqb.mongodb.net/test`;
