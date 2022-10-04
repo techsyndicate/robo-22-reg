@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const {deployCommands}= require("../discord/deploy-commands");
+const jwt = require("jsonwebtoken");
+const School = require("../models/schoolModel");
 
 router.get("/", (req, res) => {
     let { token } = req.cookies;

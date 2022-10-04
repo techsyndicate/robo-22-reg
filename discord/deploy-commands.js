@@ -13,7 +13,7 @@ const commands = [
 const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_TOKEN);
 
 function deployCommands(guildId) {
-    return rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID, guildId.toString()), { body: commands })
+    return rest.put(Routes.applicationGuildCommands(process.env.DISCORD_CLIENT_ID, guildId.toString()), { body: commands })
         .then(() => { return ('Successfully registered application commands.') })
         .catch((err) => { return err });
 }
