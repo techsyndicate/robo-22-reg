@@ -1,6 +1,7 @@
 const { SendError } = require("../services/error");
 const { renderFile } = require("../services/mail");
 const School = require("../models/schoolModel");
+const IndiReg = require("../models/indiRegModel");
 const router = require("express").Router();
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
@@ -90,6 +91,39 @@ router.get("/team", async (req, res) => {
     return res.render("teamLogin");
   }
 });
+
+router.get('/indireg', async (req, res) => {
+  const events = [[
+    "Crossword",
+    "Quiz",
+    "Film Making",
+    "Photography",
+  ]
+  ];
+  res.render('indireg', {events: events});
+})
+
+router.post('/indireg', async (req, res) => {
+  const { name, dob, email, phone, grade, schname, selected } = req.body;
+  const indiReg = new IndiReg({
+    name,
+    dob,
+    email,
+    phone,
+    grade,
+    schname,
+    selected,
+  });
+  indiReg.save()
+    .then(() => {
+      res.send({ status : "success", message : "Registered Successfully" });
+    })
+    .catch((err) => {
+      console.log(err);
+      SendError(err);
+      res.send({ status : "error", message : err });
+    })
+})
 
 router.post("/school", async (req, res) => {
   console.log(req.body);
