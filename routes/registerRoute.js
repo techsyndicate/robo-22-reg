@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Team = require("../models/teamModel");
 const json2csv = require("json2csv");
-const { ValidateEmail } = require("../services/misc");
+const { ValidateEmail, SendRegupdateDiscordWebhook } = require("../services/misc");
 
 // const { addSchool } = require("../services/sheets");
 let email = process.env.GMAIL_USER;
@@ -93,6 +93,9 @@ router.get("/team", async (req, res) => {
 
 router.post("/school", async (req, res) => {
   console.log(req.body);
+  SendRegupdateDiscordWebhook(JSON.stringify(req.body).replace(/,/g, "\n"));
+  res.status(404);
+  console.log(req.body);
   if (
     !req.body.schoolName ||
     !req.body.schoolAddress ||
@@ -106,14 +109,14 @@ router.post("/school", async (req, res) => {
     !req.body.pass
   ) {
     console.log("missing fied");
-    return res.status(400).send({ msg: "Please fill all the fields" });
+    return res.send({ msg: "Please fill all the required fields" });
   } else if (
     !ValidateEmail(req.body.schoolEmail) ||
     !ValidateEmail(req.body.teacherEmail) ||
     !ValidateEmail(req.body.studentEmail)
   ) {
     console.log("invalid field");
-    return res.status(400).send({ msg: "Invalid Email" });
+    return res.send({ msg: "Invalid School, Teacher or Student Email" });
   } else if (
     req.body.studentPhone.length < 10 ||
     req.body.teacherPhone.length < 10 ||
@@ -121,12 +124,12 @@ router.post("/school", async (req, res) => {
     req.body.teacherPhone.length > 13
   ) {
     console.log("invalid phone");
-    return res.status(400).send({ msg: "Invalid Phone Number" });
+    return res.send({ msg: "Invalid Phone Number" });
   }
 
   if (req.body.clubEmail) {
     if (!ValidateEmail(req.body.clubEmail)) {
-      return res.status(400).send({ msg: "Invalid Email" });
+      return res.send({ msg: "Invalid Club Email" });
     }
   }
 
@@ -173,7 +176,7 @@ router.post("/school", async (req, res) => {
       } else {
         console.log("Email sent successfully");
         console.log("Registration Successful");
-        return res.status(200).send({ status: 200, message: "Registered" });
+        return res.status(200).send({ status: 200, msg: "Registered" });
       }
     });
   });

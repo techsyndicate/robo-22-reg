@@ -1,7 +1,7 @@
 
 const School = require('../models/schoolModel');
 const { PermissionsBitField, PermissionFlagsBits, ChannelType } = require('discord.js');
-
+const { SendRegupdateDiscordWebhook } = require("../services/misc");
 
 const InteractionHandler = async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
@@ -38,9 +38,11 @@ async function giveChannelAcess(interaction, school) {
     let coreRole = await interaction.guild.roles.cache.find(role => role.name === 'core');
     let lounges = await interaction.guild.channels.cache.find(channel => channel.name == 'lounges');
     school.schoolName = school.schoolName.trim();
-    school.schoolName = school.schoolName.replace(/\s/g, '-');
+    school.schoolName = school.schoolName.replace(/[\s\@.!#$%^&*()_+=:;"'<>,?~]/g, '-');
     school.schoolName = school.schoolName.toLowerCase();
-    console.log(school.schoolName);
+    if (school.schoolName.endsWith('-')) {
+        school.schoolName = school.schoolName.slice(0, -1);
+    }
     let lounge = await lounges.children.cache.find(channel => channel.name == school.schoolName);
     if (lounge) {
         //add user override to lounge
@@ -50,6 +52,7 @@ async function giveChannelAcess(interaction, school) {
             ReadMessageHistory: true
         });
         await interaction.member.roles.add(role);
+        SendRegupdateDiscordWebhook(`${interaction.member.user.username} has been verified! for ${school.schoolName}`);
         await interaction.reply({ content: 'You have been verified!', ephemeral: true });
     } else {
         //create lounge
@@ -72,6 +75,7 @@ async function giveChannelAcess(interaction, school) {
                 }
             ],
         });
+        SendRegupdateDiscordWebhook(`${interaction.member.user.username} has been verified! for ${school.schoolName}`);
         await interaction.member.roles.add(role);
         await interaction.reply({ content: 'You have been verified!', ephemeral: true });
     }

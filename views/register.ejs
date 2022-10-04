@@ -4,14 +4,13 @@
         <div class="col-1">
             <h3>School Details</h3>
             <input type="text" name="schoolName" placeholder="School Name" required id="schoolName"> <br>
-            <input type="link" name="schoolAddress" placeholder="School Address (Google Maps)" required id="schoolAddress"> <br>
+            <input type="link" name="schoolAddress" placeholder="School Address (Google Maps)" required
+                id="schoolAddress"> <br>
             <input type="email" name="schoolEmail" placeholder="School Email" required id="schoolEmail"><br>
             <h3>Club Details</h3>
             <input type="text" name="clubName" placeholder="Club Name" id="clubName"><br>
             <input type="email" name="clubEmail" placeholder="Club Email" id="clubEmail"><br>
             <input type="link" name="clubWebsite" placeholder="Club Website" id="clubWebsite"><br>
-            <h3>Password</h3>
-            <input type="password" name="password" placeholder="Password" required id="password"><br>
         </div>
         <div class="col-2">
             <h3>Teacher Incharge Details</h3>
@@ -22,10 +21,18 @@
             <input type="text" name="studentName" placeholder="Student Name" id="studentName" required><br>
             <input type="email" name="studentEmail" placeholder="Student Email" id="studentEmail" required><br>
             <input type="text" name="studentPhone" placeholder="Student Phone" id="studentPhone" required><br>
+        </div>
+    </form>
+    <div class="password-phone-fix">
+        <div class="col-1">
+            <h3>Password</h3>
+            <input type="password" name="password" placeholder="Password" required id="password"><br>
+        </div>
+        <div class="col-2">
             <h3>Confirm Password</h3>
             <input type="password" name="cpassword" placeholder="Confirm Password" required id="cpassword"><br>
         </div>
-    </form>
+    </div>
 
     <div class="buttons-div">
         <button id="regButton">Register</button>
@@ -33,43 +40,89 @@
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-<script src="./js/register.js"></script>
+<script src="/js/register.js"></script>
 
 <style>
+    .password-phone-fix {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .reg {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        width: 100%;
+        min-height: 100%;
+    }
+    .regForm {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 auto;
+        width: 100%;
+    }
     h3 {
         letter-spacing: 1px;
     }
 
+    .col-1, .col-2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        width: 100%;
+    }
+
     @media(max-width:768px) {
-        .reg{
-            margin-left: 5vw;
+
+        .password-phone-fix {
+            display: flex;
+            width: 85vw;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        h1{
+
+        h1 {
             text-align: left !important;
             font-size: 10vw !important;
             margin-left: 2.5vw;
             margin-bottom: 5vw;
         }
-        button{
-            width: 85% !important;
+        .buttons-div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        #regButton {
+            width: 80vw !important;
             margin-top: 5vw;
             font-size: 4.5vw !important;
             margin-top: 2.5vw !important;
-            margin-left: -10vw !important;
             padding: 15px !important;
         }
-        h3{
+
+        h3 {
             text-align: left !important;
             font-size: 5vw !important;
             margin-left: 2.5vw !important;
             margin-top: 2.5vw !important;
         }
+
         .regForm {
             flex-direction: column;
             width: 85vw;
         }
 
-        .regForm input {
+        .regForm input, .password-phone-fix input {
             width: 80vw;
             height: 5vw !important;
             font-size: 3.5vw !important;
