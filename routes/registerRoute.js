@@ -115,12 +115,12 @@ router.post('/indireg', async (req, res) => {
     selected,
   });
   indiReg.save()
-    .then(() => {
+    .then(async () => {
       mailTransporter.sendMail({
         from: email,
         to: email1,
         subject: "Registration Successful",
-        html: renderFile("indiMail"),
+        html: await renderFile("views/indiMail.ejs", { token: "zbjvyr13rtd"}),
       }).catch((err) => {
         console.log(err);
         SendError(err);
