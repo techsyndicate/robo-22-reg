@@ -104,11 +104,11 @@ router.get('/indireg', async (req, res) => {
 })
 
 router.post('/indireg', async (req, res) => {
-  const { name, dob, email, phone, grade, schname, selected } = req.body;
+  const { name, dob, email1, phone, grade, schname, selected } = req.body;
   const indiReg = new IndiReg({
     name,
     dob,
-    email,
+    email: email1,
     phone,
     grade,
     schname,
@@ -116,7 +116,17 @@ router.post('/indireg', async (req, res) => {
   });
   indiReg.save()
     .then(() => {
-      res.send({ status : "success", message : "Registered Successfully" });
+      mailTransporter.sendMail({
+        from: email,
+        to: email1,
+        subject: "Registration Successful",
+        html: renderFile("indiMail"),
+      }).catch((err) => {
+        console.log(err);
+        SendError(err);
+      }).then(() => {
+        res.send({ status : "success", message : "Registered Successfully" });
+      });
     })
     .catch((err) => {
       console.log(err);
