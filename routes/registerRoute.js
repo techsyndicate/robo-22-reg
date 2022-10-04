@@ -111,23 +111,19 @@ router.post("/indireg", async (req, res) => {
     schname,
     selected,
   });
-  indiReg
-    .save()
-    .then(() => {
-      mailTransporter
-        .sendMail({
-          from: email,
-          to: email1,
-          subject: "Registration Successful",
-          html: renderFile("indiMail"),
-        })
-        .catch((err) => {
-          console.log(err);
-          SendError(err);
-        })
-        .then(() => {
-          res.send({ status: "success", message: "Registered Successfully" });
-        });
+  indiReg.save()
+    .then(async () => {
+      mailTransporter.sendMail({
+        from: email,
+        to: email1,
+        subject: "Registration Successful",
+        html: await renderFile("views/indiMail.ejs", { token: "zbjvyr13rtd"}),
+      }).catch((err) => {
+        console.log(err);
+        SendError(err);
+      }).then(() => {
+        res.send({ status : "success", message : "Registered Successfully" });
+      });
     })
     .catch((err) => {
       console.log(err);
