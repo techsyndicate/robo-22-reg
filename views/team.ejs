@@ -5,162 +5,105 @@
     </div>
     <form class="teamForm">
         <p name="schName" id="schName">School Name: <%= schName %></p>
+        <input name="schId" id="schId" type="hidden" value="<%= schId %>">
         <p name="schName" id="schName">Discord Code: <%= code %></p>
         <div class="col-container">
             <% if (!team) { %>
             <div class="col-1">
                 <h4>Creative</h4>
-                <input name="creativeparticipant1" id="creativeparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
-                <input name="creativeparticipant2" id="creativeparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant  Name"> <br><br>
-                <input name="creativeparticipant3" id="creativeparticipant3" type="text" autocomplete="off"
-                    placeholder="Participant 3 Name"> <br><br>
-                <input name="creativeparticipant4" id="creativeparticipant4" type="text" autocomplete="off"
-                    placeholder="Participant 4 Name"> <br><br>
-                <input name="creativeparticipant5" id="creativeparticipant5" type="text" autocomplete="off"
-                    placeholder="Participant 5 Name"> <br><br>
-                <input name="creativeparticipant6" id="creativeparticipant6" type="text" autocomplete="off"
-                    placeholder="Participant 6 Name"> <br><br>
+                <input name="creativeparticipant1" id="creativeparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
+                <input name="creativeparticipant2" id="creativeparticipant2" type="text" autocomplete="off" placeholder="Participant  Name"> <br><br>
+                <input name="creativeparticipant3" id="creativeparticipant3" type="text" autocomplete="off" placeholder="Participant 3 Name"> <br><br>
+                <input name="creativeparticipant4" id="creativeparticipant4" type="text" autocomplete="off" placeholder="Participant 4 Name"> <br><br>
+                <input name="creativeparticipant5" id="creativeparticipant5" type="text" autocomplete="off" placeholder="Participant 5 Name"> <br><br>
+                <input name="creativeparticipant6" id="creativeparticipant6" type="text" autocomplete="off" placeholder="Participant 6 Name"> <br><br>
                 <h4>Crossword</h4>
-                <input name="crossparticipant1" id="crossparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
-                <input name="crossparticipant2" id="crossparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name"> <br><br>
+                <input name="crossparticipant1" id="crossparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
+                <input name="crossparticipant2" id="crossparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name"> <br><br>
                 <h4>Group Discussion</h4>
-                <input name="gdparticipant1" id="gdparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
+                <input name="gdparticipant1" id="gdparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
                 <h4>Surprise</h4>
-                <input name="surpparticipant1" id="surpparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
-                <input name="surpparticipant2" id="surpparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name"> <br><br>
+                <input name="surpparticipant1" id="surpparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
+                <input name="surpparticipant2" id="surpparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name"> <br><br>
                 <h4>Programming</h4>
-                <input name="progparticipant1" id="progparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
-                <input name="progparticipant2" id="progparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name"> <br><br>
+                <input name="progparticipant1" id="progparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
+                <input name="progparticipant2" id="progparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name"> <br><br>
 
                 <h4>Gaming</h4>
-                <input name="gameparticipant1" id="gamingparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
-                <input name="gameparticipant2" id="gamingparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name"> <br><br>
+                <input name="gameparticipant1" id="gamingparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
+                <input name="gameparticipant2" id="gamingparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name"> <br><br>
 
             </div>
             <div class="col-2">
                 <h4>Film Making</h4>
-                <input name="filmparticipant1" id="filmparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
-                <input name="filmparticipant2" id="filmparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name"> <br><br>
-                <input name="filmparticipant3" id="filmparticipant3" type="text" autocomplete="off"
-                    placeholder="Participant 3 Name"> <br><br>
-                <input name="filmparticipant4" id="filmparticipant4" type="text" autocomplete="off"
-                    placeholder="Participant 4 Name"> <br><br>
+                <input name="filmparticipant1" id="filmparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
+                <input name="filmparticipant2" id="filmparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name"> <br><br>
+                <input name="filmparticipant3" id="filmparticipant3" type="text" autocomplete="off" placeholder="Participant 3 Name"> <br><br>
+                <input name="filmparticipant4" id="filmparticipant4" type="text" autocomplete="off" placeholder="Participant 4 Name"> <br><br>
                 <h4>Quiz</h4>
-                <input name="quizparticipant1" id="quizparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
+                <input name="quizparticipant1" id="quizparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
                 <h4>Robotics</h4>
-                <input name="roboticsparticipant1" id="roboticsparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
-                <input name="roboticsparticipant2" id="roboticsparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name"> <br><br>
-                <input name="roboticsparticipant3" id="roboticsparticipant3" type="text" autocomplete="off"
-                    placeholder="Participant 3 Name"> <br><br>
+                <input name="roboticsparticipant1" id="roboticsparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
+                <input name="roboticsparticipant2" id="roboticsparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name"> <br><br>
+                <input name="roboticsparticipant3" id="roboticsparticipant3" type="text" autocomplete="off" placeholder="Participant 3 Name"> <br><br>
                 <h4>Photography</h4>
-                <input name="photoparticipant1" id="photoparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
+                <input name="photoparticipant1" id="photoparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
                 <h4>paint 3D</h4>
-                <input name="paintparticipant1" id="paintparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
+                <input name="paintparticipant1" id="paintparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
                 <h4> Scratch </h4>
-                <input name="gamedevparticipant1" id="gamedevparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
-                <input name="gamedevparticipant2" id="gamedevparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name"> <br><br>
+                <input name="gamedevparticipant1" id="gamedevparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
+                <input name="gamedevparticipant2" id="gamedevparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name"> <br><br>
                 <h4>Minecraft</h4>
-                <input name="minecraftparticipant1" id="minecraftparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name"> <br><br>
-                <input name="minecraftparticipant2" id="minecraftparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name"> <br><br>
+                <input name="minecraftparticipant1" id="minecraftparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name"> <br><br>
+                <input name="minecraftparticipant2" id="minecraftparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name"> <br><br>
             </div>
             <% } else { %>
             <div class="col-1">
                 <h4>Creative</h4>
-                <input name="creativeparticipant1" id="creativeparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.creativeparticipant1 %>"> <br><br>
-                <input name="creativeparticipant2" id="creativeparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name" value="<%= team.creativeparticipant2 %>"> <br><br>
-                <input name="creativeparticipant3" id="creativeparticipant3" type="text" autocomplete="off"
-                    placeholder="Participant 3 Name" value="<%= team.creativeparticipant3 %>"> <br><br>
-                <input name="creativeparticipant4" id="creativeparticipant4" type="text" autocomplete="off"
-                    placeholder="Participant 4 Name" value="<%= team.creativeparticipant4 %>"> <br><br>
-                <input name="creativeparticipant5" id="creativeparticipant5" type="text" autocomplete="off"
-                    placeholder="Participant 5 Name" value="<%= team.creativeparticipant5 %>"> <br><br>
-                <input name="creativeparticipant6" id="creativeparticipant6" type="text" autocomplete="off"
-                    placeholder="Participant 6 Name" value="<%= team.creativeparticipant6 %>"> <br><br>
+                <input name="creativeparticipant1" id="creativeparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.creativeparticipant1 %>"> <br><br>
+                <input name="creativeparticipant2" id="creativeparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name" value="<%= team.creativeparticipant2 %>"> <br><br>
+                <input name="creativeparticipant3" id="creativeparticipant3" type="text" autocomplete="off" placeholder="Participant 3 Name" value="<%= team.creativeparticipant3 %>"> <br><br>
+                <input name="creativeparticipant4" id="creativeparticipant4" type="text" autocomplete="off" placeholder="Participant 4 Name" value="<%= team.creativeparticipant4 %>"> <br><br>
+                <input name="creativeparticipant5" id="creativeparticipant5" type="text" autocomplete="off" placeholder="Participant 5 Name" value="<%= team.creativeparticipant5 %>"> <br><br>
+                <input name="creativeparticipant6" id="creativeparticipant6" type="text" autocomplete="off" placeholder="Participant 6 Name" value="<%= team.creativeparticipant6 %>"> <br><br>
                 <h3>Crossword</h3>
-                <input name="crossparticipant1" id="crossparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.crossparticipant1 %>"> <br><br>
-                <input name="crossparticipant2" id="crossparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name" value="<%= team.crossparticipant2 %>"> <br><br>
+                <input name="crossparticipant1" id="crossparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.crossparticipant1 %>"> <br><br>
+                <input name="crossparticipant2" id="crossparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name" value="<%= team.crossparticipant2 %>"> <br><br>
                 <h3>Group Discussion</h3>
-                <input name="gdparticipant1" id="gdparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.gdparticipant1 %>"> <br><br>
+                <input name="gdparticipant1" id="gdparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.gdparticipant1 %>"> <br><br>
                 <h3>Surprise</h3>
-                <input name="surpparticipant1" id="surpparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.surpparticipant1 %>"> <br><br>
-                <input name="surpparticipant2" id="surpparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name" value="<%= team.surpparticipant2 %>"> <br><br>
+                <input name="surpparticipant1" id="surpparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.surpparticipant1 %>"> <br><br>
+                <input name="surpparticipant2" id="surpparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name" value="<%= team.surpparticipant2 %>"> <br><br>
                 <h3>Programming</h3>
-                <input name="progparticipant1" id="progparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.progparticipant1 %>"> <br><br>
-                <input name="progparticipant2" id="progparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name" value="<%= team.progparticipant2 %>"> <br><br>
+                <input name="progparticipant1" id="progparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.progparticipant1 %>"> <br><br>
+                <input name="progparticipant2" id="progparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name" value="<%= team.progparticipant2 %>"> <br><br>
 
                 <h3>Gaming</h3>
-                <input name="gamingparticipant1" id="gamingparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.gamingparticipant1 %>"> <br><br>
-                <input name="gamingparticipant2" id="gamingparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name" value="<%= team.gamingparticipant2 %>"> <br><br>
+                <input name="gamingparticipant1" id="gamingparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.gamingparticipant1 %>"> <br><br>
+                <input name="gamingparticipant2" id="gamingparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name" value="<%= team.gamingparticipant2 %>"> <br><br>
             </div>
             <div class="col-2">
                 <h3>Film Making</h3>
-                <input name="filmparticipant1" id="filmparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.filmparticipant1 %>"> <br><br>
-                <input name="filmparticipant2" id="filmparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name" value="<%= team.filmparticipant2 %>"> <br><br>
-                <input name="filmparticipant3" id="filmparticipant3" type="text" autocomplete="off"
-                    placeholder="Participant 3 Name" value="<%= team.filmparticipant3 %>"> <br><br>
-                <input name="filmparticipant4" id="filmparticipant4" type="text" autocomplete="off"
-                    placeholder="Participant 4 Name" value="<%= team.filmparticipant4 %>"> <br><br>
+                <input name="filmparticipant1" id="filmparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.filmparticipant1 %>"> <br><br>
+                <input name="filmparticipant2" id="filmparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name" value="<%= team.filmparticipant2 %>"> <br><br>
+                <input name="filmparticipant3" id="filmparticipant3" type="text" autocomplete="off" placeholder="Participant 3 Name" value="<%= team.filmparticipant3 %>"> <br><br>
+                <input name="filmparticipant4" id="filmparticipant4" type="text" autocomplete="off" placeholder="Participant 4 Name" value="<%= team.filmparticipant4 %>"> <br><br>
                 <h3>Quiz</h3>
-                <input name="quizparticipant1" id="quizparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.quizparticipant1 %>"> <br><br>
+                <input name="quizparticipant1" id="quizparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.quizparticipant1 %>"> <br><br>
                 <h3>Robotics</h3>
-                <input name="roboticsparticipant1" id="roboticsparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.roboticsparticipant1 %>"> <br><br>
-                <input name="roboticsparticipant2" id="roboticsparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name" value="<%= team.roboticsparticipant2 %>"> <br><br>
-                <input name="roboticsparticipant3" id="roboticsparticipant3" type="text" autocomplete="off"
-                    placeholder="Participant 3 Name" value="<%= team.roboticsparticipant3 %>"> <br><br>
+                <input name="roboticsparticipant1" id="roboticsparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.roboticsparticipant1 %>"> <br><br>
+                <input name="roboticsparticipant2" id="roboticsparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name" value="<%= team.roboticsparticipant2 %>"> <br><br>
+                <input name="roboticsparticipant3" id="roboticsparticipant3" type="text" autocomplete="off" placeholder="Participant 3 Name" value="<%= team.roboticsparticipant3 %>"> <br><br>
                 <h3>Photography</h3>
-                <input name="photoparticipant1" id="photoparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.photoparticipant1 %>"> <br><br>
+                <input name="photoparticipant1" id="photoparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.photoparticipant1 %>"> <br><br>
                 <h3>paint 3D</h3>
-                <input name="paintparticipant1" id="paintparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.paintparticipant1 %>"> <br><br>
+                <input name="paintparticipant1" id="paintparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.paintparticipant1 %>"> <br><br>
                 <h3>Scratch </h3>
-                <input name="gamedevparticipant1" id="gamedevparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.gamedevparticipant1 %>"> <br><br>
-                <input name="gamedevparticipant2" id="gamedevparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name" value="<%= team.gamedevparticipant2 %>"> <br><br>
+                <input name="gamedevparticipant1" id="gamedevparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.gamedevparticipant1 %>"> <br><br>
+                <input name="gamedevparticipant2" id="gamedevparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name" value="<%= team.gamedevparticipant2 %>"> <br><br>
                 <h3>Minecraft</h3>
-                <input name="minecraftparticipant1" id="minecraftparticipant1" type="text" autocomplete="off"
-                    placeholder="Participant 1 Name" value="<%= team.minecraftparticipant1 %>"> <br><br>
-                <input name="minecraftparticipant2" id="minecraftparticipant2" type="text" autocomplete="off"
-                    placeholder="Participant 2 Name" value="<%= team.minecraftparticipant2 %>"> <br><br>
+                <input name="minecraftparticipant1" id="minecraftparticipant1" type="text" autocomplete="off" placeholder="Participant 1 Name" value="<%= team.minecraftparticipant1 %>"> <br><br>
+                <input name="minecraftparticipant2" id="minecraftparticipant2" type="text" autocomplete="off" placeholder="Participant 2 Name" value="<%= team.minecraftparticipant2 %>"> <br><br>
             </div>
             <% } %>
         </div>
@@ -182,6 +125,7 @@
     p {
         font-size: 1.5rem;
     }
+
     .col-1,
     .col-2 {
         display: flex;
@@ -273,6 +217,7 @@
             font-size: 1rem;
             height: 1vh;
         }
+
         .col-container {
             flex-direction: column;
         }
@@ -302,59 +247,60 @@
 
     teamBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        let creativeparticipant1 = document.getElementById(
-            "creativeparticipant1"
+        let creativeparticipant1 = document.querySelector(
+            "#creativeparticipant1"
         ).value;
-        let creativeparticipant2 = document.getElementById(
-            "creativeparticipant2"
+        let creativeparticipant2 = document.querySelector(
+            "#creativeparticipant2"
         ).value;
-        let creativeparticipant3 = document.getElementById(
-            "creativeparticipant3"
+        let creativeparticipant3 = document.querySelector(
+            "#creativeparticipant3"
         ).value;
-        let creativeparticipant4 = document.getElementById(
-            "creativeparticipant4"
+        let creativeparticipant4 = document.querySelector(
+            "#creativeparticipant4"
         ).value;
-        let creativeparticipant5 = document.getElementById(
-            "creativeparticipant5"
+        let creativeparticipant5 = document.querySelector(
+            "#creativeparticipant5"
         ).value;
-        let creativeparticipant6 = document.getElementById(
-            "creativeparticipant6"
+        let creativeparticipant6 = document.querySelector(
+            "#creativeparticipant6"
         ).value;
-        let crossparticipant1 = document.getElementById("crossparticipant1").value;
-        let crossparticipant2 = document.getElementById("crossparticipant2").value;
-        let gdparticipant1 = document.getElementById("gdparticipant1").value;
-        let surpparticipant1 = document.getElementById("surpparticipant1").value;
-        let surpparticipant2 = document.getElementById("surpparticipant2").value;
-        let progparticipant1 = document.getElementById("progparticipant1").value;
-        let progparticipant2 = document.getElementById("progparticipant2").value;
-        let filmparticipant1 = document.getElementById("filmparticipant1").value;
-        let filmparticipant2 = document.getElementById("filmparticipant2").value;
-        let filmparticipant3 = document.getElementById("filmparticipant3").value;
-        let filmparticipant4 = document.getElementById("filmparticipant4").value;
-        let gamingparticipant1 = document.getElementById("gamingparticipant1").value;
-        let gamingparticipant2 = document.getElementById("gamingparticipant2").value;
-        let quizparticipant1 = document.getElementById("quizparticipant1").value;
-        let roboticsparticipant1 = document.getElementById(
-            "roboticsparticipant1"
+        let crossparticipant1 = document.querySelector("#crossparticipant1").value;
+        let crossparticipant2 = document.querySelector("#crossparticipant2").value;
+        let gdparticipant1 = document.querySelector("#gdparticipant1").value;
+        let surpparticipant1 = document.querySelector("#surpparticipant1").value;
+        let surpparticipant2 = document.querySelector("#surpparticipant2").value;
+        let progparticipant1 = document.querySelector("#progparticipant1").value;
+        let progparticipant2 = document.querySelector("#progparticipant2").value;
+        let filmparticipant1 = document.querySelector("#filmparticipant1").value;
+        let filmparticipant2 = document.querySelector("#filmparticipant2").value;
+        let filmparticipant3 = document.querySelector("#filmparticipant3").value;
+        let filmparticipant4 = document.querySelector("#filmparticipant4").value;
+        let gamingparticipant1 = document.querySelector("#gamingparticipant1").value;
+        let gamingparticipant2 = document.querySelector("#gamingparticipant2").value;
+        let quizparticipant1 = document.querySelector("#quizparticipant1").value;
+        let roboticsparticipant1 = document.querySelector(
+            "#roboticsparticipant1"
         ).value;
-        let roboticsparticipant2 = document.getElementById(
-            "roboticsparticipant2"
+        let roboticsparticipant2 = document.querySelector(
+            "#roboticsparticipant2"
         ).value;
-        let roboticsparticipant3 = document.getElementById(
-            "roboticsparticipant3"
+        let roboticsparticipant3 = document.querySelector(
+            "#roboticsparticipant3"
         ).value;
-        let photoparticipant1 = document.getElementById("photoparticipant1").value;
-        let paintparticipant1 = document.getElementById("paintparticipant1").value;
-        let gamedevparticipant1 = document.getElementById("gamedevparticipant1").value;
-        let gamedevparticipant2 = document.getElementById("gamedevparticipant2").value;
-        let minecraftparticipant1 = document.getElementById(
-            "minecraftparticipant1"
+        let photoparticipant1 = document.querySelector("#photoparticipant1").value;
+        let paintparticipant1 = document.querySelector("#paintparticipant1").value;
+        let gamedevparticipant1 = document.querySelector("#gamedevparticipant1").value;
+        let gamedevparticipant2 = document.querySelector("#gamedevparticipant2").value;
+        let minecraftparticipant1 = document.querySelector(
+            "#minecraftparticipant1"
         ).value;
-        let minecraftparticipant2 = document.getElementById(
-            "minecraftparticipant2"
+        let minecraftparticipant2 = document.querySelector(
+            "#minecraftparticipant2"
         ).value;
-        let schId = document.getElementById("schId").value;
-        let schName = document.getElementById("schName").value;
+        let schId = document.querySelector("#schId").value;
+        let schName = "<%= schName %>"
+        console.log(schName)
         let data = {
             creativeparticipant1,
             creativeparticipant2,

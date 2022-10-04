@@ -8,7 +8,10 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const Team = require("../models/teamModel");
 const json2csv = require("json2csv");
-const { ValidateEmail, SendRegupdateDiscordWebhook } = require("../services/misc");
+const {
+  ValidateEmail,
+  SendRegupdateDiscordWebhook,
+} = require("../services/misc");
 
 // const { addSchool } = require("../services/sheets");
 let email = process.env.GMAIL_USER;
@@ -92,18 +95,12 @@ router.get("/team", async (req, res) => {
   }
 });
 
-router.get('/indireg', async (req, res) => {
-  const events = [[
-    "Crossword",
-    "Quiz",
-    "Film Making",
-    "Photography",
-  ]
-  ];
-  res.render('indireg', {events: events});
-})
+router.get("/indireg", async (req, res) => {
+  const events = [["Crossword", "Quiz", "Film Making", "Photography"]];
+  res.render("indireg", { events: events });
+});
 
-router.post('/indireg', async (req, res) => {
+router.post("/indireg", async (req, res) => {
   const { name, dob, email1, phone, grade, schname, selected } = req.body;
   const indiReg = new IndiReg({
     name,
@@ -131,9 +128,9 @@ router.post('/indireg', async (req, res) => {
     .catch((err) => {
       console.log(err);
       SendError(err);
-      res.send({ status : "error", message : err });
-    })
-})
+      res.send({ status: "error", message: err });
+    });
+});
 
 router.post("/school", async (req, res) => {
   console.log(req.body);
@@ -261,6 +258,7 @@ router.post("/team", async (req, res) => {
   let { schId } = req.body;
 
   const team = await Team.findOne({ schId });
+  console.log(req.body);
   if (team) {
     const team = await Team.findOneAndUpdate({ schId }, req.body).catch(
       (err) => {
@@ -272,6 +270,7 @@ router.post("/team", async (req, res) => {
     return res.status(200).send({ msg: "Updated" });
   } else {
     const newTeam = new Team(req.body);
+
     const team = await newTeam.save().catch((err) => {
       console.log(err);
       SendError(err);
@@ -281,81 +280,80 @@ router.post("/team", async (req, res) => {
   }
 });
 
-router.get('/admin', async (req, res) => {
+router.get("/admin", async (req, res) => {
   let { token } = req.cookies;
   if (token) {
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
       if (err) {
         console.log(err);
         SendError(err);
-        return res.redirect('/register/team')
+        return res.redirect("/register/team");
       } else {
-        School.findOne({ userId: decoded })
-          .then((school) => {
-            if (school.admin) {
-              return res.render('admin', { school })
-            } else {
-              return res.redirect('/register/team')
-            }
-          });
+        School.findOne({ userId: decoded }).then((school) => {
+          if (school.admin) {
+            return res.render("admin", { school });
+          } else {
+            return res.redirect("/register/team");
+          }
+        });
       }
     });
   } else {
-    return res.redirect('/register/team')
+    return res.redirect("/register/team");
   }
-})
+});
 
-router.get('/admin/csv', async (req, res) => {
+router.get("/admin/csv", async (req, res) => {
   let { token } = req.cookies;
   if (token) {
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
       if (err) {
         console.log(err);
         SendError(err);
-        return res.redirect('/register/team')
+        return res.redirect("/register/team");
       } else {
-        School.findOne({ userId: decoded })
-          .then( async (school) => {
-            if (school.admin) {
-              const schools = await School.find();
-              const teams = await Team.find();
-              let data = [];
-              for (let i = 0; i < schools.length; i++) {
-                let school = schools[i]._doc;
-                let team = teams.find(team => team.schId == school._id);
-                school = JSON.parse(JSON.stringify(school));
-                delete school._id;
-                delete school.__v;
-                if (team) {
-                  team = team._doc;
-                  team = JSON.parse(JSON.stringify(team));
-                  delete team.schId;
-                  delete team._id;
-                  delete team.__v;
-                  data.push({
-                    ...school,
-                    ...team
-                  })
-                }
-                else {
-                  data.push({ ...school });
-                }
+        School.findOne({ userId: decoded }).then(async (school) => {
+          if (school.admin) {
+            const schools = await School.find();
+            const teams = await Team.find();
+            let data = [];
+            for (let i = 0; i < schools.length; i++) {
+              let school = schools[i]._doc;
+              let team = teams.find((team) => team.schId == school._id);
+              school = JSON.parse(JSON.stringify(school));
+              delete school._id;
+              delete school.__v;
+              if (team) {
+                team = team._doc;
+                team = JSON.parse(JSON.stringify(team));
+                delete team.schId;
+                delete team._id;
+                delete team.__v;
+                data.push({
+                  ...school,
+                  ...team,
+                });
+              } else {
+                data.push({ ...school });
               }
-              console.log(data);
-              const csv = json2csv.parse(data);
-              res.setHeader('Content-Type', 'text/csv');
-              res.setHeader('Content-Disposition', 'attachment; filename="robotronics.csv"');
-              res.status(200).send(csv);
-            } else {
-              return res.redirect('/register/team')
             }
-          });
+            console.log(data);
+            const csv = json2csv.parse(data);
+            res.setHeader("Content-Type", "text/csv");
+            res.setHeader(
+              "Content-Disposition",
+              'attachment; filename="robotronics.csv"'
+            );
+            res.status(200).send(csv);
+          } else {
+            return res.redirect("/register/team");
+          }
+        });
       }
     });
   } else {
-    return res.redirect('/register/team')
+    return res.redirect("/register/team");
   }
-
-})
+});
 
 module.exports = router;
