@@ -237,36 +237,81 @@ router.post("/team", async (req, res) => {
   }
 });
 
-// router.get('/csv', async(req, res) => {
-//   const schools = await School.find();
-//   const teams = await Team.find();
-//   let data = [];
-//   for(let i = 0; i < schools.length; i++) {
-//     let school = schools[i]._doc;
-//     let team = teams.find(team => team.schId == school._id);
-//     school = JSON.parse(JSON.stringify(school));
-//     delete school._id;
-//     delete school.__v;
-//     if(team) {
-//       team = team._doc;
-//       team = JSON.parse(JSON.stringify(team));
-//       delete team.schId;
-//       delete team._id;
-//       delete team.__v;
-//       data.push({
-//         ...school,
-//         ...team
-//       })
-//     }
-//     else  {
-//     data.push({...school});
-//     }
-//   }
-//   console.log(data);
-//   const csv = json2csv.parse(data);
-//   res.setHeader('Content-Type', 'text/csv');
-//   res.setHeader('Content-Disposition', 'attachment; filename="robotronics.csv"');
-//   res.status(200).send(csv);
-// })
+router.get('/admin', async (req, res) => {
+  let { token } = req.cookies;
+  if (token) {
+    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+      if (err) {
+        console.log(err);
+        SendError(err);
+        return res.redirect('/register/team')
+      } else {
+        School.findOne({ userId: decoded })
+          .then((school) => {
+            if (school.admin) {
+              return res.render('admin', { school })
+            } else {
+              return res.redirect('/register/team')
+            }
+          });
+      }
+    });
+  } else {
+    return res.redirect('/register/team')
+  }
+})
+
+router.get('/admin/csv', async (req, res) => {
+  let { token } = req.cookies;
+  if (token) {
+    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+      if (err) {
+        console.log(err);
+        SendError(err);
+        return res.redirect('/register/team')
+      } else {
+        School.findOne({ userId: decoded })
+          .then( async (school) => {
+            if (school.admin) {
+              const schools = await School.find();
+              const teams = await Team.find();
+              let data = [];
+              for (let i = 0; i < schools.length; i++) {
+                let school = schools[i]._doc;
+                let team = teams.find(team => team.schId == school._id);
+                school = JSON.parse(JSON.stringify(school));
+                delete school._id;
+                delete school.__v;
+                if (team) {
+                  team = team._doc;
+                  team = JSON.parse(JSON.stringify(team));
+                  delete team.schId;
+                  delete team._id;
+                  delete team.__v;
+                  data.push({
+                    ...school,
+                    ...team
+                  })
+                }
+                else {
+                  data.push({ ...school });
+                }
+              }
+              console.log(data);
+              const csv = json2csv.parse(data);
+              res.setHeader('Content-Type', 'text/csv');
+              res.setHeader('Content-Disposition', 'attachment; filename="robotronics.csv"');
+              res.status(200).send(csv);
+            } else {
+              return res.redirect('/register/team')
+            }
+          });
+      }
+    });
+  } else {
+    return res.redirect('/register/team')
+  }
+
+})
 
 module.exports = router;

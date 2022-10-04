@@ -20,6 +20,7 @@ const schoolSchema = new Schema(
     userId: reqString,
     pass: reqString,
     discordCode: reqString,
+    admin: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
