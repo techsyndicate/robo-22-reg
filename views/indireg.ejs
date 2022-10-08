@@ -1,4 +1,5 @@
 <body>
+    <% if (regopen == true) { %>
     <div id="reg-container" class="reg-container">
         <h1 class="title">Senior Events Individual Register</h1>
         <div class="reg-form">
@@ -63,6 +64,11 @@
             </p>
         </div>
     </div>
+    <% } else { %>
+    <div id="reg-container" class="reg-container">
+        <h1 class="title">Individual Registeration opens soon!</h1>
+    </div>
+    <% } %> 
 </body>
 
 <style>

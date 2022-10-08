@@ -96,8 +96,15 @@ router.get("/team", async (req, res) => {
 });
 
 router.get("/indireg", async (req, res) => {
-  const events = [["Crossword", "Quiz", "Film Making", "Photography"]];
-  res.render("indireg", { events: events });
+  const events = [["Crossword", "Quiz", "Photography", "Gaming", "Robotics"],
+  ['Creative', "Group Discussion", "Programming", "Surprise", "Film Making"]
+  ];
+  if (process.env.INDI_REG == "false") {
+    return res.render("indireg", { regopen: false });
+  } else {
+    res.render("indireg", { events: events, regopen: true });
+  }
+
 });
 
 router.post("/indireg", async (req, res) => {
@@ -117,12 +124,13 @@ router.post("/indireg", async (req, res) => {
         from: email,
         to: email1,
         subject: "Registration Successful",
-        html: await renderFile("views/indiMail.ejs", { token: "zbjvyr13rtd"}),
+        html: await renderFile("views/indiMail.ejs", { token: "zbjvyr13rtd" }),
       }).catch((err) => {
         console.log(err);
         SendError(err);
       }).then(() => {
-        res.send({ status : "success", message : "Registered Successfully" });
+        res.send({ status: "success", message: "Registered Successfully" });
+        SendRegupdateDiscordWebhook(JSON.stringify(req.body).replace(/,/g, "\n"));
       });
     })
     .catch((err) => {
