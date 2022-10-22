@@ -3,31 +3,6 @@ const {deployCommands}= require("../discord/deploy-commands");
 const jwt = require("jsonwebtoken");
 const School = require("../models/schoolModel");
 
-router.get("/", (req, res) => {
-    let { token } = req.cookies;
-    if (token) {
-        jwt.verify(token, process.env.SECRET, (err, decoded) => {
-            if (err) {
-                console.log(err);
-                SendError(err);
-                return res.redirect('/register/team')
-            } else {
-                School.findOne({ userId: decoded })
-                    .then((school) => {
-                        if (school.admin) {
-                            return res.render("discord/index");
-                        } else {
-                            return res.redirect('/register/team')
-                        }
-                    });
-            }
-        });
-    } else {
-        return res.redirect('/register/team')
-    }
-
-});
-
 router.get('/deploy-commands', async (req, res) => {
     let { token } = req.cookies;
     if (token) {

@@ -3,12 +3,7 @@
         <h1>Robotronics'22</h1>
         <p>Registration platform for Robotronics'22.</p>
         <div class="buttons-div">
-            <button onclick="invite()">Request Invite</button>
-            <button onclick="register()">Register</button>
-            <button onclick="team()">Edit Team</button>
-        </div>
-        <div class="exception-div buttons-div">
-            <button class="exception" onclick="regIndi()">Register independently</button>
+            <button onclick="team()">View Team</button>
         </div>
         <br><br>
     </div>
@@ -52,6 +47,9 @@
 
     .buttons-div {
         margin-top: 5vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .landing button {
@@ -111,17 +109,9 @@
         }
     }
 </style>
+
 <script>
-    const invite = () => {
-        window.location.href = '/invite'
-    }
-    const register = () => {
-        window.location.href = '/register'
-    }
-    const team = () => {
-        window.location.href = '/register/team'
-    }
-    const regIndi = () => {
-        window.location.href = '/register/indireg'
+    function team() {
+        window.location.href = "/register/team";
     }
 </script>

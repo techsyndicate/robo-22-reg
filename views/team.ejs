@@ -107,10 +107,6 @@
             </div>
             <% } %>
         </div>
-
-        <div class="teambtn">
-            <button id="teamBtn">Modify Team</button>
-        </div>
     </form>
 </div>
 <style>
@@ -240,132 +236,11 @@
         }
     }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
 <script>
-    var notyf = new Notyf();
-    let teamBtn = document.getElementById("teamBtn");
-
-    teamBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        let creativeparticipant1 = document.querySelector(
-            "#creativeparticipant1"
-        ).value;
-        let creativeparticipant2 = document.querySelector(
-            "#creativeparticipant2"
-        ).value;
-        let creativeparticipant3 = document.querySelector(
-            "#creativeparticipant3"
-        ).value;
-        let creativeparticipant4 = document.querySelector(
-            "#creativeparticipant4"
-        ).value;
-        let creativeparticipant5 = document.querySelector(
-            "#creativeparticipant5"
-        ).value;
-        let creativeparticipant6 = document.querySelector(
-            "#creativeparticipant6"
-        ).value;
-        let crossparticipant1 = document.querySelector("#crossparticipant1").value;
-        let crossparticipant2 = document.querySelector("#crossparticipant2").value;
-        let gdparticipant1 = document.querySelector("#gdparticipant1").value;
-        let surpparticipant1 = document.querySelector("#surpparticipant1").value;
-        let surpparticipant2 = document.querySelector("#surpparticipant2").value;
-        let progparticipant1 = document.querySelector("#progparticipant1").value;
-        let progparticipant2 = document.querySelector("#progparticipant2").value;
-        let filmparticipant1 = document.querySelector("#filmparticipant1").value;
-        let filmparticipant2 = document.querySelector("#filmparticipant2").value;
-        let filmparticipant3 = document.querySelector("#filmparticipant3").value;
-        let filmparticipant4 = document.querySelector("#filmparticipant4").value;
-        let gamingparticipant1 = document.querySelector("#gamingparticipant1").value;
-        let gamingparticipant2 = document.querySelector("#gamingparticipant2").value;
-        let quizparticipant1 = document.querySelector("#quizparticipant1").value;
-        let roboticsparticipant1 = document.querySelector(
-            "#roboticsparticipant1"
-        ).value;
-        let roboticsparticipant2 = document.querySelector(
-            "#roboticsparticipant2"
-        ).value;
-        let roboticsparticipant3 = document.querySelector(
-            "#roboticsparticipant3"
-        ).value;
-        let photoparticipant1 = document.querySelector("#photoparticipant1").value;
-        let paintparticipant1 = document.querySelector("#paintparticipant1").value;
-        let gamedevparticipant1 = document.querySelector("#gamedevparticipant1").value;
-        let gamedevparticipant2 = document.querySelector("#gamedevparticipant2").value;
-        let minecraftparticipant1 = document.querySelector(
-            "#minecraftparticipant1"
-        ).value;
-        let minecraftparticipant2 = document.querySelector(
-            "#minecraftparticipant2"
-        ).value;
-        let schId = document.querySelector("#schId").value;
-        let schName = "<%= schName %>"
-        console.log(schName)
-        let data = {
-            creativeparticipant1,
-            creativeparticipant2,
-            creativeparticipant3,
-            creativeparticipant4,
-            creativeparticipant5,
-            creativeparticipant6,
-            crossparticipant1,
-            crossparticipant2,
-            gdparticipant1,
-            surpparticipant1,
-            surpparticipant2,
-            progparticipant1,
-            progparticipant2,
-            filmparticipant1,
-            filmparticipant2,
-            filmparticipant3,
-            filmparticipant4,
-            gamingparticipant1,
-            gamingparticipant2,
-            quizparticipant1,
-            roboticsparticipant1,
-            roboticsparticipant2,
-            roboticsparticipant3,
-            photoparticipant1,
-            paintparticipant1,
-            gamedevparticipant1,
-            gamedevparticipant2,
-            minecraftparticipant1,
-            minecraftparticipant2,
-            schId,
-            schName,
-        };
-        fetch("/register/team", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        }).then((res) => {
-            if (res.status === 200) {
-                notyf.success("Team Updated Successfully");
-                setInterval(() => {
-                    location.reload()
-                }, 3000);
-
-            } else {
-                notyf.error("Team Registration Failed");
-            }
-        });
+    //disable all inputs on page
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+        input.disabled = true;
     });
-    let logoutBtn = document.querySelector("#logoutBtn");
-    logoutBtn.addEventListener('click', (e) => {
-        e.preventDefault()
-        fetch('/logout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            if (res.status === 200) {
-                location.href = '/'
-            } else {
-                notyf.error('Logout Failed')
-            }
-        })
-    })
 </script>
