@@ -364,4 +364,44 @@ router.get("/admin/csv", async (req, res) => {
   }
 });
 
+router.get('/admin/indi', async (req, res) => {
+  let { token } = req.cookies;
+  if (token) {
+    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+      if (err) {
+        console.log(err);
+        SendError(err);
+        return res.redirect("/register/team");
+      } else {
+        School.findOne({ userId: decoded }).then(async (school) => {
+          if (school.admin) {
+            const schools = await IndiReg.find();
+            let data = [];
+            for (let i = 0; i < schools.length; i++) {
+              let school = schools[i]._doc;
+              school = JSON.parse(JSON.stringify(school));
+              delete school._id;
+              delete school.__v;
+              data.push({
+                ...school,
+              });
+            }
+            const csv = json2csv.parse(data);
+            res.setHeader("Content-Type", "text/csv");
+            res.setHeader(
+              "Content-Disposition",
+              'attachment; filename="robotronics_indi.csv"'
+            );
+            res.status(200).send(csv);
+          } else {
+            return res.redirect("/register/team");
+          }
+        });
+      }
+    });
+  } else {
+    return res.redirect("/register/team");
+  }
+})
+
 module.exports = router;
